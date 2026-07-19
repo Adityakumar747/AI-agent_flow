@@ -1,0 +1,82 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+*.lcov
+.nyc_output
+
+# Production
+build/
+dist/
+.next/
+out/
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env*.local
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# OS
+Thumbs.db
+
+# Cache
+.npm
+.eslintcache
+.cache/
+.parcel-cache/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+prisma/migrations/
+!prisma/migrations/.gitkeep
+
+# Docker
+docker-data/
+.docker/
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+
+# Uploads
+uploads/
+public/uploads/
+
+# Build info
+.next/
+tsconfig.tsbuildinfo
+
+# Vercel
+.vercel
+
+# Redis
+dump.rdb
+
+# Local data
+data/

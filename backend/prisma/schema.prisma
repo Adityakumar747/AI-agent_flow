@@ -1,0 +1,327 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// User Management
+// ============================================
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      UserRole @default(AGENT)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  campaigns    Campaign[]
+  calls        Call[]       @relation("CallAgent")
+  appointments Appointment[]
+
+  @@map("users")
+}
+
+enum UserRole {
+  ADMIN
+  MANAGER
+  AGENT
+}
+
+// ============================================
+// Customer Management
+// ============================================
+
+model Customer {
+  id          String   @id @default(uuid())
+  name        String
+  email       String?
+  phone       String   @unique
+  tags        String[] @default([])
+  notes       String?
+  metadata    Json?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  calls        Call[]
+  appointments Appointment[]
+  campaigns    CampaignCustomer[]
+
+  @@index([phone])
+  @@index([email])
+  @@map("customers")
+}
+
+// ============================================
+// Campaign Management
+// ============================================
+
+model Campaign {
+  id          String         @id @default(uuid())
+  name        String
+  description String?
+  status      CampaignStatus @default(DRAFT)
+  
+  // AI Configuration
+  aiScript         String        // The conversation script for AI
+  aiVoice          String        @default("alloy") // OpenAI TTS voice
+  aiLanguage       String        @default("en") // Language code
+  aiPersonality    String?       // AI personality description
+  
+  // Campaign Settings
+  maxAttempts      Int           @default(3)
+  retryDelay       Int           @default(60) // minutes
+  callWindowStart  String?       // e.g., "09:00"
+  callWindowEnd    String?       // e.g., "18:00"
+  timezone         String        @default("UTC")
+  
+  // Goal
+  goalType         String        @default("APPOINTMENT") // APPOINTMENT, SURVEY, REMINDER
+  
+  // Scheduling
+  scheduledAt      DateTime?
+  startedAt        DateTime?
+  completedAt      DateTime?
+  
+  // Stats
+  totalCustomers   Int           @default(0)
+  callsMade        Int           @default(0)
+  callsSuccessful  Int           @default(0)
+  callsFailed      Int           @default(0)
+  appointmentsBooked Int         @default(0)
+  
+  createdById String
+  createdBy   User     @relation(fields: [createdById], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  customers CampaignCustomer[]
+  calls     Call[]
+
+  @@index([status])
+  @@index([createdById])
+  @@map("campaigns")
+}
+
+enum CampaignStatus {
+  DRAFT
+  SCHEDULED
+  ACTIVE
+  PAUSED
+  COMPLETED
+  CANCELLED
+}
+
+model CampaignCustomer {
+  id         String   @id @default(uuid())
+  campaignId String
+  customerId String
+  status     String   @default("PENDING") // PENDING, CALLED, SUCCESS, FAILED
+  attempts   Int      @default(0)
+  lastCallAt DateTime?
+  createdAt  DateTime @default(now())
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@unique([campaignId, customerId])
+  @@index([campaignId])
+  @@index([customerId])
+  @@map("campaign_customers")
+}
+
+// ============================================
+// Call Management
+// ============================================
+
+model Call {
+  id         String     @id @default(uuid())
+  twilioSid  String?    @unique
+  
+  // Call Details
+  direction  CallDirection
+  status     CallStatus    @default(INITIATED)
+  
+  // Participants
+  fromNumber String
+  toNumber   String
+  customerId String?
+  agentId    String?
+  campaignId String?
+  
+  // Call Data
+  duration       Int?       // seconds
+  recordingUrl   String?
+  transcription  String?    @db.Text
+  summary        String?    @db.Text
+  sentiment      String?    // POSITIVE, NEUTRAL, NEGATIVE
+  
+  // AI Conversation
+  conversationLog Json?     // Array of messages
+  aiResponses     Int       @default(0)
+  
+  // Outcome
+  outcome        String?    // APPOINTMENT_BOOKED, CALLBACK, NO_ANSWER, BUSY, FAILED
+  appointmentId  String?    @unique
+  
+  // Timing
+  startedAt   DateTime?
+  answeredAt  DateTime?
+  endedAt     DateTime?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  customer    Customer?    @relation(fields: [customerId], references: [id])
+  agent       User?        @relation("CallAgent", fields: [agentId], references: [id])
+  campaign    Campaign?    @relation(fields: [campaignId], references: [id])
+  appointment Appointment? @relation(fields: [appointmentId], references: [id])
+
+  @@index([customerId])
+  @@index([campaignId])
+  @@index([status])
+  @@index([direction])
+  @@index([createdAt])
+  @@map("calls")
+}
+
+enum CallDirection {
+  INBOUND
+  OUTBOUND
+}
+
+enum CallStatus {
+  INITIATED
+  RINGING
+  IN_PROGRESS
+  COMPLETED
+  BUSY
+  NO_ANSWER
+  FAILED
+  CANCELLED
+}
+
+// ============================================
+// Appointment Management
+// ============================================
+
+model Appointment {
+  id             String            @id @default(uuid())
+  customerId     String
+  agentId        String?
+  
+  // Appointment Details
+  service        String
+  dateTime       DateTime
+  duration       Int               @default(30) // minutes
+  location       String?
+  notes          String?
+  
+  // Status
+  status         AppointmentStatus @default(CONFIRMED)
+  
+  // Reminders
+  reminderSent   Boolean           @default(false)
+  reminderSentAt DateTime?
+  
+  // Confirmation
+  confirmationSms Boolean          @default(false)
+  confirmationSentAt DateTime?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  customer Customer @relation(fields: [customerId], references: [id])
+  agent    User?    @relation(fields: [agentId], references: [id])
+  call     Call?
+
+  @@index([customerId])
+  @@index([dateTime])
+  @@index([status])
+  @@map("appointments")
+}
+
+enum AppointmentStatus {
+  CONFIRMED
+  PENDING
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+// ============================================
+// Knowledge Base (for Inbound Calls)
+// ============================================
+
+model KnowledgeBase {
+  id        String   @id @default(uuid())
+  question  String
+  answer    String   @db.Text
+  category  String
+  keywords  String[] @default([])
+  isActive  Boolean  @default(true)
+  priority  Int      @default(0) // Higher priority = shown first
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category])
+  @@index([isActive])
+  @@map("knowledge_base")
+}
+
+// ============================================
+// Analytics & Metrics
+// ============================================
+
+model CallMetric {
+  id         String   @id @default(uuid())
+  date       DateTime @db.Date
+  
+  // Call Stats
+  totalCalls       Int @default(0)
+  inboundCalls     Int @default(0)
+  outboundCalls    Int @default(0)
+  completedCalls   Int @default(0)
+  failedCalls      Int @default(0)
+  
+  // Duration Stats
+  avgDuration      Float @default(0)
+  totalDuration    Int   @default(0)
+  
+  // Outcome Stats
+  appointmentsBooked Int @default(0)
+  callbackRequested  Int @default(0)
+  transferredToHuman Int @default(0)
+  
+  // AI Stats
+  avgSentimentScore Float @default(0)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([date])
+  @@index([date])
+  @@map("call_metrics")
+}
+
+// ============================================
+// System Configuration
+// ============================================
+
+model SystemConfig {
+  id    String @id @default(uuid())
+  key   String @unique
+  value Json
+  updatedAt DateTime @updatedAt
+
+  @@map("system_config")
+}

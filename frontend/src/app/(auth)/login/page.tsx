@@ -12,10 +12,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Phone, Eye, EyeOff } from 'lucide-react';
-import CursorGrid from '@/components/CursorGrid';
+import { Phone, Eye, EyeOff, Github } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+const Galaxy = dynamic(() => import('@/components/Galaxy'), { ssr: false });
 
 const loginSchema = z.object({
+  name: z.string().optional(),
   email: z.string().email('Invalid email address'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
 });
@@ -40,7 +43,10 @@ export default function LoginPage() {
     setIsLoading(true);
     try {
       const response = await authService.login(data.email, data.password);
-      setUser(response.user);
+      const name = data.name || response.user?.name || 'User';
+      const mergedUser = { ...response.user, name };
+      setUser(mergedUser);
+      localStorage.setItem('user', JSON.stringify(mergedUser));
       toast.success('Login successful!');
       router.push('/dashboard');
     } catch (error: any) {
@@ -50,30 +56,33 @@ export default function LoginPage() {
     }
   };
 
+  const handleOAuth = (provider: 'github') => {
+    window.location.href = `http://localhost:3001/api/auth/${provider}`;
+  };
+
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-black p-4 overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center p-4 overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <CursorGrid
-          cellSize={70}
-          color="#4746ef"
-          radius={160}
-          falloff="smooth"
-          holdTime={400}
-          fadeDuration={800}
-          lineWidth={1.2}
-          maxOpacity={1}
-          fillOpacity={0}
-          gridOpacity={0}
-          cellRadius={0}
-          clickPulse={true}
-          pulseSpeed={600}
+        <Galaxy
+          mouseRepulsion
+          mouseInteraction
+          density={1}
+          glowIntensity={0.3}
+          saturation={0}
+          hueShift={140}
+          twinkleIntensity={0.3}
+          rotationSpeed={0.1}
+          repulsionStrength={2}
+          autoCenterRepulsion={0}
+          starSpeed={0.5}
+          speed={1}
         />
       </div>
 
-      <Card className="relative z-10 w-full max-w-md border-white/10 bg-white/5 text-white backdrop-blur-xl">
+      <Card className="relative z-10 w-full max-w-md border-white/10 bg-white/[0.03] text-white">
         <CardHeader className="space-y-1 text-center">
           <div className="flex justify-center mb-4">
-            <div className="rounded-full bg-[#4746ef] p-3 shadow-[0_0_25px_rgba(71,70,239,0.6)]">
+            <div className="rounded-full p-3 bg-[#4746ef] shadow-[0_0_25px_rgba(71,70,239,0.6)]">
               <Phone className="h-8 w-8 text-white" />
             </div>
           </div>
@@ -82,6 +91,21 @@ export default function LoginPage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="name" className="text-white/90">Name</Label>
+              <Input
+                id="name"
+                type="text"
+                placeholder="Your name"
+                {...register('name')}
+                disabled={isLoading}
+                className="border-white/10 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#4746ef]"
+              />
+              {errors.name && (
+                <p className="text-sm text-red-400">{errors.name.message}</p>
+              )}
+            </div>
+
             <div className="space-y-2">
               <Label htmlFor="email" className="text-white/90">Email</Label>
               <Input
@@ -129,6 +153,18 @@ export default function LoginPage() {
               {isLoading ? 'Signing in...' : 'Sign In'}
             </Button>
           </form>
+
+          <div className="mt-4">
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full border-white/10 bg-white/5 text-white hover:bg-white/10"
+              onClick={() => handleOAuth('github')}
+            >
+              <Github className="mr-2 h-4 w-4" />
+              GitHub
+            </Button>
+          </div>
         </CardContent>
       </Card>
     </div>

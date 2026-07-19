@@ -8,6 +8,7 @@ import { Mail, Phone, Trash2 } from 'lucide-react';
 import { customersService } from '@/services/customers.service';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
+import { useTheme } from '@/components/theme-provider';
 
 interface CustomersListProps {
   customers: Customer[];
@@ -25,6 +26,8 @@ export function CustomersList({
   selectedIds, onToggleSelect, onToggleSelectAll 
 }: CustomersListProps) {
   const queryClient = useQueryClient();
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
   const handleDelete = async (id: string) => {
     if (confirm('Are you sure you want to delete this customer?')) {
@@ -39,22 +42,22 @@ export function CustomersList({
   };
 
   if (isLoading) {
-    return <div className="text-center py-8">Loading customers...</div>;
+    return <div className="text-center py-8" style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>Loading customers...</div>;
   }
 
   if (customers.length === 0) {
     return (
-      <Card className="p-8 text-center">
-        <p className="text-muted-foreground">No customers found</p>
+      <Card className={`p-8 text-center ${isDark ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200'}`}>
+        <p style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>No customers found</p>
       </Card>
     );
   }
 
   return (
-    <Card>
+    <Card className={isDark ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200'}>
       <Table>
         <TableHeader>
-          <TableRow>
+          <TableRow className={isDark ? 'border-white/10' : 'border-gray-200'}>
             <TableHead className="w-[50px]">
               <input 
                 type="checkbox" 
@@ -63,16 +66,16 @@ export function CustomersList({
                 onChange={onToggleSelectAll}
               />
             </TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>Contact</TableHead>
-            <TableHead>Tags</TableHead>
-            <TableHead>Created</TableHead>
+            <TableHead className={isDark ? 'text-gray-300' : 'text-gray-700'}>Name</TableHead>
+            <TableHead className={isDark ? 'text-gray-300' : 'text-gray-700'}>Contact</TableHead>
+            <TableHead className={isDark ? 'text-gray-300' : 'text-gray-700'}>Tags</TableHead>
+            <TableHead className={isDark ? 'text-gray-300' : 'text-gray-700'}>Created</TableHead>
             <TableHead className="w-[100px]">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {customers.map((customer) => (
-            <TableRow key={customer.id}>
+            <TableRow key={customer.id} className={isDark ? 'border-white/10' : 'border-gray-200'}>
               <TableCell>
                 <input 
                   type="checkbox" 
@@ -83,20 +86,20 @@ export function CustomersList({
               </TableCell>
               <TableCell>
                 <div>
-                  <div className="font-medium">{customer.name}</div>
+                  <div className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>{customer.name}</div>
                   {customer.notes && (
-                    <div className="text-sm text-muted-foreground">{customer.notes}</div>
+                    <div className="text-sm" style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>{customer.notes}</div>
                   )}
                 </div>
               </TableCell>
               <TableCell>
                 <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-2 text-sm">
+                  <div className="flex items-center gap-2 text-sm" style={{ color: isDark ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.8)' }}>
                     <Phone className="h-3 w-3" />
                     {formatPhoneNumber(customer.phone)}
                   </div>
                   {customer.email && (
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-2 text-sm" style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>
                       <Mail className="h-3 w-3" />
                       {customer.email}
                     </div>
@@ -106,13 +109,11 @@ export function CustomersList({
               <TableCell>
                 <div className="flex flex-wrap gap-1">
                   {customer.tags?.map((tag) => (
-                    <Badge key={tag} variant="secondary">
-                      {tag}
-                    </Badge>
+                    <Badge key={tag} variant="secondary">{tag}</Badge>
                   ))}
                 </div>
               </TableCell>
-              <TableCell>{formatDate(customer.createdAt)}</TableCell>
+              <TableCell style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>{formatDate(customer.createdAt)}</TableCell>
               <TableCell>
                 <Button 
                   variant="ghost" 
@@ -129,8 +130,8 @@ export function CustomersList({
         </TableBody>
       </Table>
 
-      <div className="flex items-center justify-between p-4 border-t">
-        <p className="text-sm text-muted-foreground">
+      <div className={`flex items-center justify-between p-4 border-t ${isDark ? 'border-white/10' : 'border-gray-200'}`}>
+        <p className="text-sm" style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>
           Page {page} of {totalPages}
         </p>
         <div className="flex gap-2">

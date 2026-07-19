@@ -6,8 +6,11 @@ import { DashboardStats } from '@/components/dashboard/dashboard-stats';
 import { CallTrendsChart } from '@/components/dashboard/call-trends-chart';
 import { RecentCallsList } from '@/components/dashboard/recent-calls-list';
 import { CampaignOverview } from '@/components/dashboard/campaign-overview';
+import { useTheme } from '@/components/theme-provider';
 
 export default function DashboardPage() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const { data: overview, isLoading } = useQuery({
     queryKey: ['analytics', 'overview'],
     queryFn: () => analyticsService.getOverview(),
@@ -21,7 +24,7 @@ export default function DashboardPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-full">
-        <div className="text-lg text-muted-foreground">Loading dashboard...</div>
+        <div style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>Loading dashboard...</div>
       </div>
     );
   }
@@ -29,8 +32,8 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Dashboard</h1>
-        <p className="text-muted-foreground">
+        <h1 className={`text-3xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Dashboard</h1>
+        <p style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>
           Welcome back! Here's your voice calling overview.
         </p>
       </div>

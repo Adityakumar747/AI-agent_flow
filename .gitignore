@@ -80,3 +80,7 @@ dump.rdb
 
 # Local data
 data/
+
+# Study / docs artifacts
+STUDY_NOTES.md
+docs/

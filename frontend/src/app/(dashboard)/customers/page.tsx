@@ -10,6 +10,7 @@ import { CustomersList } from '@/components/customers/customers-list';
 import { CreateCustomerDialog } from '@/components/customers/create-customer-dialog';
 import { CreateCampaignDialog } from '@/components/campaigns/create-campaign-dialog';
 import { toast } from 'sonner';
+import { useTheme } from '@/components/theme-provider';
 
 export default function CustomersPage() {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
@@ -19,6 +20,8 @@ export default function CustomersPage() {
   const [isImporting, setIsImporting] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const queryClient = useQueryClient();
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
   const { data, isLoading } = useQuery({
     queryKey: ['customers', page],
@@ -32,9 +35,9 @@ export default function CustomersPage() {
     setIsImporting(true);
     try {
       const result = await customersService.importCustomers(file);
-      toast.success(`✅ Imported ${result.imported} customers successfully!${result.skipped ? ` (${result.skipped} rows skipped - invalid phone)` : ''}`);
+      toast.success(`Imported ${result.imported} customers successfully!${result.skipped ? ` (${result.skipped} rows skipped - invalid phone)` : ''}`);
       if (result.errors && result.errors.length > 0) {
-        toast.warning(`⚠️ ${result.errors[0]}`);
+        toast.warning(`${result.errors[0]}`);
       }
       queryClient.invalidateQueries({ queryKey: ['customers'] });
     } catch (error: any) {
@@ -79,14 +82,14 @@ export default function CustomersPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Customers</h1>
-          <p className="text-muted-foreground">
+          <h1 className={`text-3xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Customers</h1>
+          <p style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>
             Manage your customer database and tags
           </p>
         </div>
         <div className="flex gap-2">
           {selectedIds.length > 0 && (
-            <span className="text-sm self-center mr-2 text-muted-foreground">
+            <span className="text-sm self-center mr-2" style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>
               {selectedIds.length} selected
             </span>
           )}
@@ -96,6 +99,7 @@ export default function CustomersPage() {
           </Button>
           <Button 
             variant="outline" 
+            className={isDark ? 'text-white hover:bg-white/10' : 'text-gray-700 hover:bg-gray-100'}
             onClick={() => {
               if (selectedIds.length === 0) {
                 toast.error('Please select at least one customer for the campaign');
@@ -114,11 +118,20 @@ export default function CustomersPage() {
             className="hidden" 
             accept=".csv, .xlsx, .xls" 
           />
-          <Button variant="outline" onClick={() => fileInputRef.current?.click()} disabled={isImporting}>
+          <Button 
+            variant="outline" 
+            className={isDark ? 'text-white hover:bg-white/10' : 'text-gray-700 hover:bg-gray-100'}
+            onClick={() => fileInputRef.current?.click()} 
+            disabled={isImporting}
+          >
             {isImporting ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Upload className="h-4 w-4 mr-2" />}
             Import CSV / Excel
           </Button>
-          <Button variant="outline" onClick={handleExport}>
+          <Button 
+            variant="outline" 
+            className={isDark ? 'text-white hover:bg-white/10' : 'text-gray-700 hover:bg-gray-100'}
+            onClick={handleExport}
+          >
             <Download className="h-4 w-4 mr-2" />
             Export Excel
           </Button>

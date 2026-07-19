@@ -7,8 +7,8 @@ export class CreateUserDto {
   email: string;
 
   @IsString()
-  @IsNotEmpty()
-  password: string;
+  @IsOptional()
+  password?: string;
 
   @IsString()
   @IsNotEmpty()
@@ -21,4 +21,12 @@ export class CreateUserDto {
   @IsBoolean()
   @IsOptional()
   isActive?: boolean;
+
+  @IsString()
+  @IsOptional()
+  provider?: string;
+
+  @IsString()
+  @IsOptional()
+  providerId?: string;
 }

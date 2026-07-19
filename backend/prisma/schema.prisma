@@ -17,10 +17,12 @@ datasource db {
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
-  password  String
+  password  String?
   name      String
   role      UserRole @default(AGENT)
   isActive  Boolean  @default(true)
+  provider  String?  @default("local")
+  providerId String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

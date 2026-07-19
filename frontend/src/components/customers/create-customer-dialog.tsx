@@ -10,6 +10,7 @@ import { customersService } from '@/services/customers.service';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useTheme } from '@/components/theme-provider';
 
 const schema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -35,6 +36,8 @@ export function CreateCustomerDialog({ open, onClose }: CreateCustomerDialogProp
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
   const mutation = useMutation({
     mutationFn: (data: FormData) => customersService.createCustomer(data),
@@ -53,30 +56,31 @@ export function CreateCustomerDialog({ open, onClose }: CreateCustomerDialogProp
 
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
-        <h2 className="text-xl font-bold mb-4">Add New Customer</h2>
+      <div className={`rounded-lg shadow-lg max-w-md w-full p-6 ${
+        isDark ? 'bg-gray-900 border border-white/10' : 'bg-white'
+      }`}>
+        <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>Add New Customer</h2>
         <form onSubmit={handleSubmit((data) => mutation.mutate(data))} className="space-y-4">
           <div>
-            <Label htmlFor="name">Name *</Label>
-            <Input id="name" {...register('name')} />
+            <Label htmlFor="name" className={isDark ? 'text-gray-200' : 'text-gray-700'}>Name *</Label>
+            <Input id="name" {...register('name')} className={isDark ? 'bg-gray-800 border-white/10 text-white' : ''} />
             {errors.name && <p className="text-sm text-red-500 mt-1">{errors.name.message}</p>}
           </div>
 
           <div>
-            <Label htmlFor="phone">Phone *</Label>
-            <Input id="phone" type="tel" placeholder="+1234567890" {...register('phone')} />
+            <Label htmlFor="phone" className={isDark ? 'text-gray-200' : 'text-gray-700'}>Phone *</Label>
+            <Input id="phone" type="tel" placeholder="+1234567890" {...register('phone')} className={isDark ? 'bg-gray-800 border-white/10 text-white placeholder:text-gray-500' : ''} />
             {errors.phone && <p className="text-sm text-red-500 mt-1">{errors.phone.message}</p>}
           </div>
 
           <div>
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" {...register('email')} />
-            {errors.email && <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>}
+            <Label htmlFor="email" className={isDark ? 'text-gray-200' : 'text-gray-700'}>Email</Label>
+            <Input id="email" type="email" {...register('email')} className={isDark ? 'bg-gray-800 border-white/10 text-white' : ''} />
           </div>
 
           <div>
-            <Label htmlFor="notes">Notes</Label>
-            <Input id="notes" {...register('notes')} />
+            <Label htmlFor="notes" className={isDark ? 'text-gray-200' : 'text-gray-700'}>Notes</Label>
+            <Input id="notes" {...register('notes')} className={isDark ? 'bg-gray-800 border-white/10 text-white' : ''} />
           </div>
 
           <div className="flex gap-2 justify-end pt-4">

@@ -8,6 +8,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { campaignsService } from '@/services/campaigns.service';
 import { toast } from 'sonner';
 import { Play, Pause, Trash2, Users, Phone, CheckCircle } from 'lucide-react';
+import { useTheme } from '@/components/theme-provider';
 
 const statusColors: Record<string, string> = {
   DRAFT: 'bg-gray-100 text-gray-700',
@@ -20,6 +21,8 @@ const statusColors: Record<string, string> = {
 
 export function CampaignsList({ campaigns, isLoading, page, totalPages, onPageChange }: any) {
   const queryClient = useQueryClient();
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
   const startMutation = useMutation({
     mutationFn: (id: string) => campaignsService.startCampaign(id),
@@ -51,14 +54,14 @@ export function CampaignsList({ campaigns, isLoading, page, totalPages, onPageCh
     onError: () => toast.error('Failed to delete campaign'),
   });
 
-  if (isLoading) return <div className="text-center py-12 text-gray-500">Loading campaigns...</div>;
+  if (isLoading) return <div className="text-center py-12" style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>Loading campaigns...</div>;
 
   if (!campaigns || campaigns.length === 0) {
     return (
       <Card className="p-12 text-center">
-        <Phone className="h-12 w-12 mx-auto text-gray-300 mb-4" />
-        <h3 className="text-lg font-semibold text-gray-700">No campaigns yet</h3>
-        <p className="text-gray-500 mt-1">Create a campaign to start making calls</p>
+        <Phone className={`h-12 w-12 mx-auto mb-4 ${isDark ? 'text-gray-600' : 'text-gray-300'}`} />
+        <h3 className={`text-lg font-semibold ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>No campaigns yet</h3>
+        <p style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }} className="mt-1">Create a campaign to start making calls</p>
       </Card>
     );
   }
@@ -66,19 +69,19 @@ export function CampaignsList({ campaigns, isLoading, page, totalPages, onPageCh
   return (
     <div className="space-y-4">
       {campaigns.map((campaign: Campaign) => (
-        <Card key={campaign.id} className="p-5">
+        <Card key={campaign.id} className={`p-5 ${isDark ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200'}`}>
           <div className="flex items-start justify-between">
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-2">
-                <h3 className="text-lg font-semibold">{campaign.name}</h3>
+                <h3 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>{campaign.name}</h3>
                 <span className={`text-xs px-2 py-1 rounded-full font-medium ${statusColors[campaign.status] || 'bg-gray-100'}`}>
                   {campaign.status}
                 </span>
               </div>
               {campaign.description && (
-                <p className="text-sm text-gray-500 mb-3">{campaign.description}</p>
+                <p className="text-sm mb-3" style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>{campaign.description}</p>
               )}
-              <div className="flex items-center gap-5 text-sm text-gray-600">
+              <div className="flex items-center gap-5 text-sm" style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>
                 <span className="flex items-center gap-1">
                   <Users className="h-4 w-4" />
                   {campaign.totalCustomers} customers
@@ -92,7 +95,7 @@ export function CampaignsList({ campaigns, isLoading, page, totalPages, onPageCh
                   {campaign.callsSuccessful} successful
                 </span>
               </div>
-              <div className="mt-2 text-xs text-gray-400">
+              <div className={`mt-2 text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
                 Goal: {campaign.goalType} | Voice: {campaign.aiVoice} | Language: {campaign.aiLanguage}
               </div>
             </div>
@@ -138,7 +141,7 @@ export function CampaignsList({ campaigns, isLoading, page, totalPages, onPageCh
       {totalPages > 1 && (
         <div className="flex justify-center gap-2 pt-4">
           <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => onPageChange(page - 1)}>Previous</Button>
-          <span className="text-sm py-2">Page {page} of {totalPages}</span>
+          <span className="text-sm py-2" style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>Page {page} of {totalPages}</span>
           <Button variant="outline" size="sm" disabled={page >= totalPages} onClick={() => onPageChange(page + 1)}>Next</Button>
         </div>
       )}

@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { UsersService } from '../users/users.service';
@@ -13,24 +13,49 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, password: string): Promise<any> {
-    const user = await this.usersService.findByEmail(email);
-    
-    if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
+    try {
+      const user = await this.usersService.findByEmail(email);
+      
+      if (!user || !user.password) {
+        throw new UnauthorizedException('Invalid credentials');
+      }
+
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      
+      if (!isPasswordValid) {
+        throw new UnauthorizedException('Invalid credentials');
+      }
+
+      if (!user.isActive) {
+        throw new UnauthorizedException('Account is deactivated');
+      }
+
+      const { password: _, ...result } = user;
+      return result;
+    } catch (error) {
+      console.error('validateUser error:', error);
+      throw error;
+    }
+  }
+
+  async validateOAuthUser(profile: { provider: string; providerId: string; email: string; name: string }): Promise<any> {
+    const existingUser = await this.usersService.findByEmail(profile.email);
+
+    if (!existingUser) {
+      return this.usersService.create({
+        email: profile.email,
+        password: '',
+        name: profile.name,
+        role: 'AGENT',
+        provider: profile.provider,
+        providerId: profile.providerId,
+      } as any);
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    
-    if (!isPasswordValid) {
-      throw new UnauthorizedException('Invalid credentials');
-    }
-
-    if (!user.isActive) {
-      throw new UnauthorizedException('Account is deactivated');
-    }
-
-    const { password: _, ...result } = user;
-    return result;
+    return this.usersService.update(existingUser.id, {
+      provider: profile.provider,
+      providerId: profile.providerId,
+    } as any);
   }
 
   async login(user: any): Promise<LoginResponseDto> {

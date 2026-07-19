@@ -6,6 +6,7 @@ import { campaignsService } from '@/services/campaigns.service';
 import { customersService } from '@/services/customers.service';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import { useTheme } from '@/components/theme-provider';
 
 interface CreateCampaignDialogProps {
   open: boolean;
@@ -19,9 +20,11 @@ export function CreateCampaignDialog({ open, onClose, selectedCustomerIds = [] }
   const [aiScript, setAiScript] = useState('');
   const [goalType, setGoalType] = useState('APPOINTMENT');
   const [dialogSelectedCustomers, setDialogSelectedCustomers] = useState<string[]>([]);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
   const { data: customersData } = useQuery({
-    queryKey: ['customers', 1], // just fetch first page of customers for now
+    queryKey: ['customers', 1],
     queryFn: () => customersService.getCustomers(1, 100),
     enabled: open && selectedCustomerIds.length === 0,
   });
@@ -56,18 +59,24 @@ export function CreateCampaignDialog({ open, onClose, selectedCustomerIds = [] }
 
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 overflow-y-auto">
-      <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full p-6 my-8">
-        <h2 className="text-xl font-bold mb-4">Create New Campaign</h2>
+      <div className={`rounded-lg shadow-lg max-w-2xl w-full p-6 my-8 ${
+        isDark ? 'bg-gray-900 border border-white/10' : 'bg-white'
+      }`}>
+        <h2 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>Create New Campaign</h2>
         {selectedCustomerIds.length > 0 ? (
-          <div className="mb-4 text-sm text-blue-600 bg-blue-50 p-2 rounded">
+          <div className={`mb-4 text-sm p-2 rounded ${
+            isDark ? 'text-blue-400 bg-blue-900/20' : 'text-blue-600 bg-blue-50'
+          }`}>
             You are creating a campaign for {selectedCustomerIds.length} selected customer(s).
           </div>
         ) : (
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">Select Customers (Hold Ctrl/Cmd to select multiple)</label>
+            <label className={`block text-sm font-medium mb-1 ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>Select Customers (Hold Ctrl/Cmd to select multiple)</label>
             <select
               multiple
-              className="w-full border rounded-md p-2 h-32"
+              className={`w-full border rounded-md p-2 h-32 ${
+                isDark ? 'bg-gray-800 border-white/10 text-white' : 'bg-white border-gray-300 text-gray-900'
+              }`}
               value={dialogSelectedCustomers}
               onChange={(e) => {
                 const options = Array.from(e.target.selectedOptions);
@@ -82,11 +91,13 @@ export function CreateCampaignDialog({ open, onClose, selectedCustomerIds = [] }
         )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Campaign Name</label>
+            <label className={`block text-sm font-medium mb-1 ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>Campaign Name</label>
             <input
               type="text"
               required
-              className="w-full border rounded-md p-2"
+              className={`w-full border rounded-md p-2 ${
+                isDark ? 'bg-gray-800 border-white/10 text-white placeholder:text-gray-500' : 'bg-white border-gray-300 text-gray-900 placeholder:text-gray-400'
+              }`}
               placeholder="e.g., Bike Service Reminder"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -94,9 +105,11 @@ export function CreateCampaignDialog({ open, onClose, selectedCustomerIds = [] }
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">Goal Type</label>
+            <label className={`block text-sm font-medium mb-1 ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>Goal Type</label>
             <select
-              className="w-full border rounded-md p-2"
+              className={`w-full border rounded-md p-2 ${
+                isDark ? 'bg-gray-800 border-white/10 text-white' : 'bg-white border-gray-300 text-gray-900'
+              }`}
               value={goalType}
               onChange={(e) => setGoalType(e.target.value)}
             >
@@ -107,14 +120,16 @@ export function CreateCampaignDialog({ open, onClose, selectedCustomerIds = [] }
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">AI Agent Script</label>
-            <p className="text-xs text-muted-foreground mb-2">
+            <label className={`block text-sm font-medium mb-1 ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>AI Agent Script</label>
+            <p className={`text-xs mb-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
               Write exactly what you want the AI to say. Be clear about the goal. (Min 50 characters)
             </p>
             <textarea
               required
               rows={6}
-              className="w-full border rounded-md p-2"
+              className={`w-full border rounded-md p-2 ${
+                isDark ? 'bg-gray-800 border-white/10 text-white placeholder:text-gray-500' : 'bg-white border-gray-300 text-gray-900 placeholder:text-gray-400'
+              }`}
               placeholder="Hello! I am calling from Super Bikes. I noticed your vehicle is due for a service..."
               value={aiScript}
               onChange={(e) => setAiScript(e.target.value)}

@@ -409,13 +409,13 @@ export class CallsProcessor {
 
         // Add to queue with stagger to avoid overwhelming system
         const delay = Math.random() * 5000; // Random delay up to 5 seconds
-        await (job.queue as any).add(
+        await job.queue.add(
           'outbound-call',
           {
             callId: call.id,
             customerId: campaignCustomer.customerId,
             campaignId: campaign.id,
-          },
+          } as OutboundCallJob,
           {
             delay: Math.floor(delay),
           },

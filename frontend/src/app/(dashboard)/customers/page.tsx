@@ -35,7 +35,7 @@ export default function CustomersPage() {
     setIsImporting(true);
     try {
       const result = await customersService.importCustomers(file);
-      toast.success(`Imported ${result.imported} customers successfully!${result.skipped ? ` (${result.skipped} rows skipped - invalid phone)` : ''}`);
+      toast.success(`Imported ${result.imported} customers successfully!`);
       if (result.errors && result.errors.length > 0) {
         toast.warning(`${result.errors[0]}`);
       }

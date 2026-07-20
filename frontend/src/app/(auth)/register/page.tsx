@@ -12,20 +12,20 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Phone, Eye, EyeOff, Github } from 'lucide-react';
+import { Phone, Eye, EyeOff } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
 const Galaxy = dynamic(() => import('@/components/Galaxy'), { ssr: false });
 
-const loginSchema = z.object({
-  name: z.string().optional(),
+const registerSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
   email: z.string().email('Invalid email address'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
 });
 
-type LoginForm = z.infer<typeof loginSchema>;
+type RegisterForm = z.infer<typeof registerSchema>;
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -35,29 +35,23 @@ export default function LoginPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginForm>({
-    resolver: zodResolver(loginSchema),
+  } = useForm<RegisterForm>({
+    resolver: zodResolver(registerSchema),
   });
 
-  const onSubmit = async (data: LoginForm) => {
+  const onSubmit = async (data: RegisterForm) => {
     setIsLoading(true);
     try {
-      const response = await authService.login(data.email, data.password);
-      const name = data.name || response.user?.name || 'User';
-      const mergedUser = { ...response.user, name };
-      setUser(mergedUser);
-      localStorage.setItem('user', JSON.stringify(mergedUser));
-      toast.success('Login successful!');
+      const response = await authService.register(data.email, data.password, data.name);
+      setUser(response.user);
+      toast.success('Account created successfully!');
       router.push('/dashboard');
     } catch (error: any) {
-      toast.error(error.response?.data?.message || 'Login failed');
+      const message = error.response?.data?.message || error.response?.data?.error || 'Registration failed';
+      toast.error(message);
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleOAuth = (provider: 'github') => {
-    window.location.href = `http://localhost:3001/api/auth/${provider}`;
   };
 
   return (
@@ -86,17 +80,17 @@ export default function LoginPage() {
               <Phone className="h-8 w-8 text-white" />
             </div>
           </div>
-          <CardTitle className="text-2xl font-bold text-white">Sign In</CardTitle>
+          <CardTitle className="text-2xl font-bold text-white">Create Account</CardTitle>
           <CardDescription className="text-white/70">AI Voice Agent</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-white/90">Name</Label>
+              <Label htmlFor="name" className="text-white/90">Full Name</Label>
               <Input
                 id="name"
                 type="text"
-                placeholder="Your name"
+                placeholder="John Doe"
                 {...register('name')}
                 disabled={isLoading}
                 className="border-white/10 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#4746ef]"
@@ -150,29 +144,17 @@ export default function LoginPage() {
               className="w-full bg-white text-black hover:bg-white/90 font-medium"
               disabled={isLoading}
             >
-              {isLoading ? 'Signing in...' : 'Sign In'}
+              {isLoading ? 'Creating account...' : 'Create Account'}
             </Button>
           </form>
 
-          <div className="mt-4">
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full border-white/10 bg-white/5 text-white hover:bg-white/10"
-              onClick={() => handleOAuth('github')}
-            >
-              <Github className="mr-2 h-4 w-4" />
-              GitHub
-            </Button>
-          </div>
-
           <div className="mt-4 text-center text-sm text-white/70">
-            Don't have an account?{' '}
+            Already have an account?{' '}
             <button
-              onClick={() => router.push('/register')}
+              onClick={() => router.push('/login')}
               className="text-[#4746ef] hover:underline"
             >
-              Sign up
+              Sign in
             </button>
           </div>
         </CardContent>

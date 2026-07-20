@@ -16,6 +16,8 @@ export default function Navbar({ activePage }: NavbarProps) {
     return pathname === `/${page}`;
   };
 
+  const isAuthPage = pathname === '/login' || pathname === '/register';
+
   return (
     <nav className="relative z-20 flex items-center justify-center mt-5 px-6 py-5 max-w-7xl mx-auto w-full">
       <div className="flex items-center justify-between w-full px-6 py-3 rounded-2xl bg-white/[0.02] border border-white/10 backdrop-blur-xl">
@@ -26,27 +28,38 @@ export default function Navbar({ activePage }: NavbarProps) {
           <span className="text-white font-semibold text-xl tracking-tight">Voice Agent</span>
         </button>
 
-        <div className="hidden md:flex items-center gap-8 text-sm text-white/80">
-          <button onClick={() => router.push('/features')} className={isActive('features') ? 'text-white' : 'hover:text-white transition-colors'}>Features</button>
-          <button onClick={() => router.push('/about')} className={isActive('about') ? 'text-white' : 'hover:text-white transition-colors'}>About</button>
-          <Button
-            size="default"
-            className="bg-white text-black hover:bg-white/90 font-medium"
-            onClick={() => router.push('/login')}
-          >
-            Sign up
-          </Button>
-        </div>
+        {!isAuthPage && (
+          <div className="hidden md:flex items-center gap-8 text-sm text-white/80">
+            <button onClick={() => router.push('/features')} className={isActive('features') ? 'text-white' : 'hover:text-white transition-colors'}>Features</button>
+            <button onClick={() => router.push('/about')} className={isActive('about') ? 'text-white' : 'hover:text-white transition-colors'}>About</button>
+            <Button
+              size="default"
+              className="bg-white text-black hover:bg-white/90 font-medium"
+              onClick={() => router.push('/register')}
+            >
+              Sign up
+            </Button>
+            <Button
+              size="default"
+              className="bg-white text-black hover:bg-white/90 font-medium"
+              onClick={() => router.push('/login')}
+            >
+              Sign in
+            </Button>
+          </div>
+        )}
 
-        <div className="md:hidden">
-          <Button
-            size="default"
-            className="bg-white text-black hover:bg-white/90 font-medium"
-            onClick={() => router.push('/login')}
-          >
-            Sign up
-          </Button>
-        </div>
+        {!isAuthPage && (
+          <div className="md:hidden">
+            <Button
+              size="default"
+              className="bg-white text-black hover:bg-white/90 font-medium"
+              onClick={() => router.push('/register')}
+            >
+              Sign up
+            </Button>
+          </div>
+        )}
       </div>
     </nav>
   );

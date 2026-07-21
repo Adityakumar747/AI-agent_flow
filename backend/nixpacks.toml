@@ -1,0 +1,6 @@
+[providers]
+enableStdlib = true
+
+[providers.apt]
+pkgs = ["openssl"]
+

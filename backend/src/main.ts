@@ -21,11 +21,16 @@ async function bootstrap() {
 
   // Enable CORS with more permissive settings for development
   app.enableCors({
-    origin: [configService.get('FRONTEND_URL') || 'http://localhost:3002', 'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002'],
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Requested-With'],
-  });
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'http://localhost:3002',
+    'https://ai-agent-flow-lake.vercel.app',
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Requested-With'],
+});
 
   // Body parser middleware for handling different content types
   app.use(bodyParser.json({ limit: '50mb' }));

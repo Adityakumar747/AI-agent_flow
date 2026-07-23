@@ -25,7 +25,7 @@ export default function Navbar({ activePage }: NavbarProps) {
           <div className="h-9 w-9 rounded-lg bg-white flex items-center justify-center">
             <span className="text-black font-bold text-sm">AI</span>
           </div>
-          <span className="text-white font-semibold text-xl tracking-tight">Voice Agent</span>
+          <span className="text-white font-semibold text-xl tracking-tight">VoiceForge</span>
         </button>
 
         {!isAuthPage && (

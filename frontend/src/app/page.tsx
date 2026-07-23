@@ -31,16 +31,15 @@ export default function HomePage() {
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 mb-6">
             <span className="px-2 py-0.5 rounded bg-white/10 text-white text-[10px] font-medium">NEW</span>
-            <span>Just shipped v2.0</span>
+            <span>VoiceForge AI Voice Calling Platform</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
-            Components you shall<br />have, young padawan.
+            Your AI Employee<br />Never Misses a Call
           </h1>
 
           <p className="text-lg text-white/60 mb-10 max-w-2xl mx-auto">
-            Build beautiful, accessible interfaces with our component library. 
-            Designed for developers who value craft.
+            Automate outbound calls, answer customer inquiries, schedule appointments, and provide 24/7 support with natural AI conversations.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

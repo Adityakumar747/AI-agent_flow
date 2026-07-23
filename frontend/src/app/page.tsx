@@ -31,7 +31,7 @@ export default function HomePage() {
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 mb-6">
             <span className="px-2 py-0.5 rounded bg-white/10 text-white text-[10px] font-medium">NEW</span>
-            <span>VoiceForge AI Voice Calling Platform</span>
+            <span>V1.0</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">

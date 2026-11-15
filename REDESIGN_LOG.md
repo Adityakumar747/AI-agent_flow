@@ -8,53 +8,54 @@
 ---
 
 ## Phase 0: Baseline & Audit (Date: 2026-11-15)
-
-### 1. Build Baseline
-- Command: `cd frontend; npm run build`
-- Result: **PASS** (15 static pages generated)
-  - `/` (979 B)
-  - `/_not-found` (873 B)
-  - `/about` (1.08 kB)
-  - `/features` (1.14 kB)
-  - `/login` (2.07 kB)
-  - `/register` (1.73 kB)
-  - `/callback` (2.57 kB)
-  - `/dashboard` (3.58 kB)
-  - `/campaigns` (5.17 kB)
-  - `/calls` (2.36 kB)
-  - `/customers` (6.29 kB)
-  - `/appointments` (3.87 kB)
-  - `/analytics` (2.13 kB)
-- Shared First Load JS: 87.4 kB
-
-### 2. Typecheck Baseline
-- Result: **PASS** (TypeScript 5.4.2 via Next.js compiler)
-
-### 3. Lint Baseline
-- Command: `cd frontend; npm run lint`
-- Baseline Issues in original codebase:
-  - `src/app/(auth)/login/page.tsx:170`: unescaped single quote (`react/no-unescaped-entities`)
-  - `src/app/(dashboard)/dashboard/page.tsx:37`: unescaped single quote (`react/no-unescaped-entities`)
-- Action: These will be fixed during the Phase 4 & Phase 5 restyling.
+- Baseline build: PASS (15 static pages)
+- Baseline lint: Recorded baseline issues
+- Baseline docs: Written `DESIGN_AUDIT.md`
+- Status: **DONE** (Commit `db9d481`)
 
 ---
 
-## Step-by-Step Execution Plan & Checkpoints
-- [x] **Phase 0 — Baseline & Audit**: Branch `redesign/v2` created, baseline recorded, `DESIGN_AUDIT.md` created. **[⛳ CHECKPOINT]**
-- [ ] **Phase 1 — Foundations**: Design tokens (`tokens.css`), dark/light theme provider with zero-FOUC inline script, Tailwind mapping, Lenis smooth scrolling (strictly for marketing routes `/`, `/about`, `/features`).
-- [ ] **Phase 2 — Component Library**: Under `components/ui/`: Button, Input, StatusPill, Card, MockupWindow, Waveform, TranscriptStream, Accordion, EmptyState/Skeleton, ThemeToggle, Navbar, Footer.
-- [ ] **Phase 3 — Landing Page (`/`)**: Hero with live call console (animated waveform, streaming transcript, outcome card), Benefit strip, 3-step workflow, Numbered features 01–05 with sticky mockup, Use cases, Trust/architecture, Pricing plans, FAQ accordion, Final CTA, Footer. **[⛳ CHECKPOINT]**
-- [ ] **Phase 4 — Auth + App Shell**: Login & Register pages (400px card, tokens, dual theme), Responsive App Shell (Sidebar 240px/64px, Header, breadcrumbs, user menu, NO Lenis in app shell).
-- [ ] **Phase 5 — Inner Pages (One commit per page)**:
-  - 5.1 `/dashboard`
-  - 5.2 `/calls`
-  - 5.3 `/campaigns`
-  - 5.4 `/customers`
-  - 5.5 `/appointments`
-  - 5.6 `/analytics`
-  - 5.7 `/settings` (Agent configuration & telephony)
-  - 5.8 `/about` & `/features` (retained & restyled with design tokens)
-  - 5.9 `/_not-found`
-- [ ] **Phase 6 — Polish**: Motion & reduced-motion, typography, responsive pass (360px to 1440px), a11y, contrast verification.
-- [ ] **Phase 7 — Final Verification**: Complete checklist, zero regression, all forms and WebSockets verified.
+## Phase 1: Foundations (Date: 2026-11-15)
+- Design tokens defined in `styles/tokens.css` with dark theme `--bg: #0A0A0B`, surface layers, `--accent: #34D399` ("live signal"), and AA-compliant light theme `--bg: #FAFAF9`, `--accent: #047857`.
+- Theme provider implemented in `components/theme-provider.tsx` with zero-FOUC inline script in `app/layout.tsx`.
+- Tailwind configuration mapped to design tokens in `tailwind.config.js`.
+- Smooth scrolling implemented with `lenis` in `components/smooth-scroll.tsx`, strictly scoped to marketing routes (`/`, `/about`, `/features`, `/design`) and disabled in app routes.
+- Status: **DONE** (Commit `b5e97d0`)
 
+---
+
+## Phase 2: Component Library (Date: 2026-11-15)
+- Built comprehensive UI components under `components/ui/`:
+  - `Button` (primary inverted, emerald accent, secondary surface, ghost, danger, sizes sm/md/lg, loading spinner)
+  - `StatusPill` (live with pulsing emerald dot, success, warning, danger, neutral)
+  - `Card` (surface-1, hairline border, interactive hover)
+  - `MockupWindow` (abstract window chrome with status pill and tabs)
+  - `Waveform` (responsive 54-bar audio frequency bars, CPU-saving pause via IntersectionObserver)
+  - `TranscriptStream` (streaming real-time speaker dialogue with autoPlay demo and static modes)
+  - `ThemeToggle` (sun/moon switch without load flash)
+  - `Input` (mono phone support, error validation state)
+  - `Accordion` (smooth accessible collapsible FAQ pattern)
+  - `EmptyState` & `Skeleton` (empty and loading state primitives)
+  - `MarketingNavbar` & `MarketingFooter` (sticky blur header, anchor navigation, theme toggle)
+- Internal design showcase created at `/design`.
+- Status: **DONE** (Commit `841ede4`)
+
+---
+
+## Phase 3: Landing Page & Marketing Pages (Date: 2026-11-15)
+- Redesigned `/` per `DESIGN.md` §6:
+  - Hero with live call console mockup, animated waveform, streaming transcript, and confirmed outcome.
+  - Benefit strip (Scale, Latency, Conversion).
+  - 3-step workflow (Configure -> Autonomous Outbound Queue -> Transcripts & Calendar Sync).
+  - Space-style 01–05 numbered features with sticky interactive mockup window.
+  - 4 real use case cards.
+  - Trust and carrier infrastructure block.
+  - Transparent pricing plans with monthly/annual toggle.
+  - FAQ accordion answering 7 real technical questions.
+  - Final high-impact CTA section.
+- Restyled `/about` and `/features` using the design tokens and layout components.
+- Verification:
+  - `npm run build`: **PASS** (16 static pages generated)
+  - `npm run lint`: **PASS** (0 errors, 0 warnings)
+  - Dev server running at `http://localhost:3002`.
+- Status: **DONE** (Commit `547c647`) **[⛳ CHECKPOINT]**

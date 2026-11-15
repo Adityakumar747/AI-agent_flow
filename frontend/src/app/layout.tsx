@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={inter.variable}>
+    <html lang="en" suppressHydrationWarning className={inter.variable} style={{ backgroundColor: '#0A0A0B' }}>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -28,6 +28,7 @@ export default function RootLayout({
                 var stored = localStorage.getItem('theme');
                 var theme = stored || 'dark';
                 document.documentElement.setAttribute('data-theme', theme);
+                document.documentElement.style.backgroundColor = theme === 'light' ? '#FAFAF9' : '#0A0A0B';
                 if (theme === 'dark') {
                   document.documentElement.classList.add('dark');
                 } else {
@@ -38,7 +39,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-[var(--bg)] text-[var(--text)] min-h-screen">
+      <body className="bg-[var(--bg)] text-[var(--text)] min-h-screen" style={{ backgroundColor: '#0A0A0B', color: '#F4F4F5' }}>
         <Providers>
           <SmoothScroll>
             {children}

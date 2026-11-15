@@ -25,7 +25,7 @@ export function AppointmentsList({ appointments, isLoading, page, totalPages, on
     return (
       <div className="glass rounded-[28px] p-12 text-center">
         <div className="glass-control inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono text-[var(--text-muted)]">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />
           <span>Synchronizing calendar bookings...</span>
         </div>
       </div>
@@ -36,7 +36,7 @@ export function AppointmentsList({ appointments, isLoading, page, totalPages, on
     return (
       <div className="glass rounded-[28px] p-12 sm:p-16 text-center space-y-4">
         <div className="w-12 h-12 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center text-white mx-auto">
-          <Calendar className="w-5 h-5 text-emerald-400" />
+          <Calendar className="w-5 h-5 text-orange-400" />
         </div>
         <div className="space-y-1">
           <h3 className="text-base font-medium text-[var(--text)]">No appointments scheduled</h3>
@@ -97,13 +97,13 @@ export function AppointmentsList({ appointments, isLoading, page, totalPages, on
                     <span
                       className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium ${
                         isConfirmed
-                          ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                          ? 'bg-orange-500/10 text-orange-400 border border-orange-500/20'
                           : isPending
                           ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
                           : 'bg-white/[0.04] text-[var(--text-muted)] border border-white/10'
                       }`}
                     >
-                      {isConfirmed && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />}
+                      {isConfirmed && <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />}
                       {appointment.status || 'CONFIRMED'}
                     </span>
                   </td>

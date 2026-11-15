@@ -41,7 +41,7 @@ export function Sidebar({ isOpen = true }: { isOpen?: boolean }) {
             <span className="font-medium text-sm tracking-tight text-[var(--text)]">
               VoiceForge
             </span>
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />
           </div>
         </Link>
       </div>
@@ -74,8 +74,8 @@ export function Sidebar({ isOpen = true }: { isOpen?: boolean }) {
       <div className="p-4 border-t border-[var(--border)] space-y-2">
         <div className="glass-control p-2.5 rounded-xl flex items-center justify-between text-[11px] font-mono">
           <span className="text-[var(--text-subtle)]">TELEPHONY</span>
-          <span className="text-emerald-400 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+          <span className="text-orange-400 flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />
             TWILIO ACTIVE
           </span>
         </div>

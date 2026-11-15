@@ -79,7 +79,7 @@ export default function FeaturesPage() {
         {/* ── Header ──────────────────────────────────────────────────────────── */}
         <section className="px-5 sm:px-8 lg:px-10 pb-16 max-w-[1280px] mx-auto text-center space-y-5">
           <div className="glass-control inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono text-[var(--text-muted)] select-none">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />
             <span>Capabilities & Infrastructure</span>
           </div>
 
@@ -122,7 +122,7 @@ export default function FeaturesPage() {
 
                   <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono">
                     <span className="text-[var(--text-subtle)]">METRIC</span>
-                    <span className="text-emerald-400 font-medium">{feat.metrics}</span>
+                    <span className="text-orange-400 font-medium">{feat.metrics}</span>
                   </div>
                 </div>
               );

@@ -50,12 +50,12 @@ export function CampaignPerformance({ data }: any) {
                 <td className="px-6 py-4 font-mono text-xs text-[var(--text-muted)]">
                   {c.dialed} calls
                 </td>
-                <td className="px-6 py-4 font-mono text-xs text-emerald-400 font-medium">
+                <td className="px-6 py-4 font-mono text-xs text-orange-400 font-medium">
                   {c.conversion}
                 </td>
                 <td className="px-6 py-4">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[11px] font-mono text-emerald-400">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-[11px] font-mono text-orange-400">
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />
                     {c.status}
                   </span>
                 </td>

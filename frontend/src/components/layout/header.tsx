@@ -43,8 +43,8 @@ export function Header({ onToggleSidebar, isSidebarOpen }: HeaderProps) {
           Welcome, <span className="font-semibold">{user?.name || 'Operator'}</span>
         </h2>
         {isConnected && (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[11px] font-mono text-emerald-400 font-medium">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-[11px] font-mono text-orange-400 font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />
             LIVE TELEMETRY
           </span>
         )}

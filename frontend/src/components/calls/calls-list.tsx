@@ -16,7 +16,7 @@ export function CallsList({ calls, isLoading, page, totalPages, onPageChange }: 
     return (
       <div className="glass rounded-[28px] p-12 text-center">
         <div className="glass-control inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono text-[var(--text-muted)]">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />
           <span>Fetching carrier call logs...</span>
         </div>
       </div>
@@ -27,7 +27,7 @@ export function CallsList({ calls, isLoading, page, totalPages, onPageChange }: 
     return (
       <div className="glass rounded-[28px] p-12 sm:p-16 text-center space-y-4">
         <div className="w-12 h-12 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center text-white mx-auto">
-          <PhoneCall className="w-5 h-5 text-emerald-400" />
+          <PhoneCall className="w-5 h-5 text-orange-400" />
         </div>
         <div className="space-y-1">
           <h3 className="text-base font-medium text-[var(--text)]">No call operations found</h3>
@@ -81,7 +81,7 @@ export function CallsList({ calls, isLoading, page, totalPages, onPageChange }: 
                     <span
                       className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium ${
                         isSuccess
-                          ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                          ? 'bg-orange-500/10 text-orange-400 border border-orange-500/20'
                           : isLive
                           ? 'bg-white/10 text-white border border-white/20'
                           : isFailed
@@ -89,7 +89,7 @@ export function CallsList({ calls, isLoading, page, totalPages, onPageChange }: 
                           : 'bg-white/[0.04] text-[var(--text-muted)] border border-white/10'
                       }`}
                     >
-                      {isLive && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />}
+                      {isLive && <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />}
                       {call.status || 'LOGGED'}
                     </span>
                   </td>
@@ -100,7 +100,7 @@ export function CallsList({ calls, isLoading, page, totalPages, onPageChange }: 
                     {call.createdAt ? new Date(call.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Just now'}
                   </td>
                   <td className="px-6 py-4 text-xs">
-                    <span className="text-emerald-400 font-medium">
+                    <span className="text-orange-400 font-medium">
                       {call.outcome || 'Appointment Confirmed'}
                     </span>
                   </td>

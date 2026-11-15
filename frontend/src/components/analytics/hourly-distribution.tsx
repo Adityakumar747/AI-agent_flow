@@ -32,7 +32,7 @@ export function HourlyDistribution({ data }: any) {
         {hours.map((h) => (
           <div key={h.time} className="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
             <div
-              className="w-full rounded-t-lg bg-white/15 group-hover:bg-emerald-400 transition-all duration-200"
+              className="w-full rounded-t-lg bg-white/15 group-hover:bg-orange-400 transition-all duration-200"
               style={{ height: `${h.height}%` }}
             />
             <span className="text-[10px] font-mono text-[var(--text-subtle)] whitespace-nowrap">

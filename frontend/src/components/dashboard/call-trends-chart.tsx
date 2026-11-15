@@ -17,7 +17,7 @@ export function CallTrendsChart({ data }: any) {
       </div>
 
       <div className="h-64 flex flex-col items-center justify-center rounded-2xl bg-white/[0.02] border border-white/[0.06] p-6 text-center space-y-2">
-        <span className="font-mono text-xs text-emerald-400">● LIVE PIPELINE</span>
+        <span className="font-mono text-xs text-orange-400">● LIVE PIPELINE</span>
         <div className="text-sm font-medium text-[var(--text)]">
           {data && data.length ? `${data.length} intervals recorded` : 'Telephony activity ready'}
         </div>

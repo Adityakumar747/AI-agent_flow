@@ -23,7 +23,7 @@ export function RecentCallsList() {
 
       <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-8 text-center space-y-3">
         <div className="w-10 h-10 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center text-white mx-auto">
-          <PhoneCall className="w-4 h-4 text-emerald-400" />
+          <PhoneCall className="w-4 h-4 text-orange-400" />
         </div>
         <div className="text-sm font-medium text-[var(--text)]">Connected to Telephony Stream</div>
         <p className="text-xs text-[var(--text-muted)] max-w-sm mx-auto">

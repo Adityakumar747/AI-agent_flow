@@ -44,7 +44,7 @@ export function CampaignsList({ campaigns, isLoading, page, totalPages, onPageCh
     return (
       <div className="glass rounded-[28px] p-12 text-center">
         <div className="glass-control inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono text-[var(--text-muted)]">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />
           <span>Loading campaigns...</span>
         </div>
       </div>
@@ -55,7 +55,7 @@ export function CampaignsList({ campaigns, isLoading, page, totalPages, onPageCh
     return (
       <div className="glass rounded-[28px] p-12 sm:p-16 text-center space-y-4">
         <div className="w-12 h-12 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center text-white mx-auto">
-          <Megaphone className="w-5 h-5 text-emerald-400" />
+          <Megaphone className="w-5 h-5 text-orange-400" />
         </div>
         <div className="space-y-1">
           <h3 className="text-base font-medium text-[var(--text)]">No active campaigns</h3>
@@ -88,13 +88,13 @@ export function CampaignsList({ campaigns, isLoading, page, totalPages, onPageCh
                   <span
                     className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium ${
                       isActive
-                        ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                        ? 'bg-orange-500/10 text-orange-400 border border-orange-500/20'
                         : isPaused
                         ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
                         : 'bg-white/[0.04] text-[var(--text-muted)] border border-white/10'
                     }`}
                   >
-                    {isActive && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />}
+                    {isActive && <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />}
                     {campaign.status}
                   </span>
                 </div>
@@ -114,7 +114,7 @@ export function CampaignsList({ campaigns, isLoading, page, totalPages, onPageCh
                     <Phone className="w-3.5 h-3.5 text-[var(--text-subtle)]" />
                     {campaign.callsMade || 0} Dialed
                   </span>
-                  <span className="flex items-center gap-1.5 text-emerald-400">
+                  <span className="flex items-center gap-1.5 text-orange-400">
                     <CheckCircle2 className="w-3.5 h-3.5" />
                     {campaign.callsSuccessful || 0} Booked
                   </span>
@@ -131,7 +131,7 @@ export function CampaignsList({ campaigns, isLoading, page, totalPages, onPageCh
                   <button
                     onClick={() => startMutation.mutate(campaign.id)}
                     disabled={startMutation.isPending}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-medium text-emerald-400 hover:bg-emerald-500/20 transition-colors disabled:opacity-50"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/30 text-xs font-medium text-orange-400 hover:bg-orange-500/20 transition-colors disabled:opacity-50"
                   >
                     <Play className="w-3.5 h-3.5 fill-current" />
                     {startMutation.isPending ? 'Starting...' : 'Start'}

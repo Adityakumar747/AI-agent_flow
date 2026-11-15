@@ -32,7 +32,7 @@ export function MarketingNavbar() {
             <Phone className="w-3 h-3 text-white" />
           </div>
           <span className="font-medium tracking-tight">VoiceForge</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />
         </Link>
 
         {/* Desktop Navigation Links Pill (Space Center Floating Glass) */}

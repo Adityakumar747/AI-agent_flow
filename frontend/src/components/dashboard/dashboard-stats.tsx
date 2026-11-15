@@ -72,7 +72,7 @@ export function DashboardStats({ data }: DashboardStatsProps) {
               <div className="text-xs text-[var(--text-muted)] mt-1">{stat.description}</div>
             </div>
 
-            <div className="pt-2 border-t border-white/[0.06] text-[10px] font-mono text-emerald-400 font-medium">
+            <div className="pt-2 border-t border-white/[0.06] text-[10px] font-mono text-orange-400 font-medium">
               {stat.indicator}
             </div>
           </div>

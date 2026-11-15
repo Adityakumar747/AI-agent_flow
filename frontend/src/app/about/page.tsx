@@ -62,7 +62,7 @@ export default function AboutPage() {
         {/* ── Hero Section ────────────────────────────────────────────────────── */}
         <section className="px-5 sm:px-8 lg:px-10 pb-20 max-w-[1280px] mx-auto text-center space-y-5">
           <div className="glass-control inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono text-[var(--text-muted)] select-none">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />
             <span>Mission & Philosophy</span>
           </div>
 
@@ -135,7 +135,7 @@ export default function AboutPage() {
               >
                 <div className="space-y-3">
                   <h3 className="text-lg font-medium text-[var(--text)]">{member.name}</h3>
-                  <div className="font-mono text-xs text-emerald-400">{member.role}</div>
+                  <div className="font-mono text-xs text-orange-400">{member.role}</div>
                   <p className="text-xs text-[var(--text-muted)] leading-relaxed">
                     {member.detail}
                   </p>

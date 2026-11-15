@@ -134,7 +134,7 @@ export default function HomePage() {
           <div className="mx-auto max-w-4xl text-center space-y-6">
             {/* Live Indicator Pill */}
             <div className="glass-control inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono text-[var(--text-muted)] select-none">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />
               <span className="text-[var(--text)] font-medium">Live Voice Engine</span>
               <span className="text-white/20">/</span>
               <span>Autonomous Phone Operations</span>
@@ -206,8 +206,8 @@ export default function HomePage() {
                   call · live #VF-0482
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[11px] font-mono text-emerald-400 font-medium">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-[11px] font-mono text-orange-400 font-medium">
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />
                     00:26 ACTIVE
                   </span>
                 </div>
@@ -219,7 +219,7 @@ export default function HomePage() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-[var(--border)] text-xs font-mono">
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-full bg-[var(--surface-2)] border border-[var(--border)] flex items-center justify-center text-[var(--text)]">
-                      <Mic className="w-4 h-4 text-emerald-400" />
+                      <Mic className="w-4 h-4 text-orange-400" />
                     </div>
                     <div>
                       <div className="font-semibold text-sm text-[var(--text)]">Marcus Vance</div>
@@ -227,7 +227,7 @@ export default function HomePage() {
                     </div>
                   </div>
                   <div className="text-left sm:text-right">
-                    <div className="text-emerald-400 font-medium">AUDIO DUPLEX · 380ms</div>
+                    <div className="text-orange-400 font-medium">AUDIO DUPLEX · 380ms</div>
                     <div className="text-[var(--text-subtle)]">Carrier: Twilio Voice</div>
                   </div>
                 </div>
@@ -236,7 +236,7 @@ export default function HomePage() {
                 <div className="bg-[var(--surface-2)]/60 p-4 rounded-xl border border-[var(--border)]">
                   <div className="flex items-center justify-between text-[11px] font-mono text-[var(--text-subtle)] mb-2">
                     <span>SPEECH FREQUENCY SPECTRUM</span>
-                    <span className="text-emerald-400">ACTIVE STEREO STREAM</span>
+                    <span className="text-orange-400">ACTIVE STEREO STREAM</span>
                   </div>
                   <Waveform active={true} height={44} bars={52} />
                 </div>
@@ -250,14 +250,14 @@ export default function HomePage() {
                 </div>
 
                 {/* Outcome Badge Card */}
-                <div className="flex items-center justify-between p-4 rounded-xl bg-emerald-500/[0.08] border border-emerald-500/20 text-xs">
+                <div className="flex items-center justify-between p-4 rounded-xl bg-orange-500/[0.08] border border-orange-500/20 text-xs">
                   <div className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-orange-400 flex-shrink-0" />
                     <span className="font-medium text-[var(--text)]">
                       Outcome Confirmed: Appointment set for Tomorrow, 3:00 PM EST
                     </span>
                   </div>
-                  <span className="font-mono text-[11px] text-emerald-400 uppercase font-semibold">
+                  <span className="font-mono text-[11px] text-orange-400 uppercase font-semibold">
                     SUCCESS
                   </span>
                 </div>
@@ -338,7 +338,7 @@ export default function HomePage() {
                 <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
                   VoiceForge connects over carrier lines via Twilio, handling streaming speech recognition, reasoning, and speech synthesis.
                 </p>
-                <div className="p-3 rounded-xl bg-white/[0.03] font-mono text-[11px] text-emerald-400 border border-white/10">
+                <div className="p-3 rounded-xl bg-white/[0.03] font-mono text-[11px] text-orange-400 border border-white/10">
                   ● DUPLEX_STREAM: ACTIVE (12 Concurrent Lines)
                 </div>
               </div>
@@ -380,7 +380,7 @@ export default function HomePage() {
                 >
                   <div className="flex items-center justify-between text-xs font-mono text-[var(--text-subtle)]">
                     <span>{uc.category}</span>
-                    <span className="text-emerald-400 font-medium">{uc.metric}</span>
+                    <span className="text-orange-400 font-medium">{uc.metric}</span>
                   </div>
                   <h3 className="text-xl font-medium text-[var(--text)] tracking-tight">
                     {uc.title}
@@ -412,7 +412,7 @@ export default function HomePage() {
                 <div className="text-xs text-[var(--text-muted)] mt-1">Carrier Deliverability</div>
               </div>
               <div className="p-6 rounded-2xl border border-[var(--border)] bg-[var(--surface-1)]">
-                <div className="text-2xl font-bold font-mono text-emerald-400">&lt; 450ms</div>
+                <div className="text-2xl font-bold font-mono text-orange-400">&lt; 450ms</div>
                 <div className="text-xs text-[var(--text-muted)] mt-1">Voice Turnaround</div>
               </div>
               <div className="p-6 rounded-2xl border border-[var(--border)] bg-[var(--surface-1)]">
@@ -520,19 +520,19 @@ export default function HomePage() {
                   </div>
                   <ul className="space-y-2 text-xs text-[var(--text-muted)]">
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-emerald-400" /> 2,500 call minutes / month
+                      <Check className="w-3.5 h-3.5 text-orange-400" /> 2,500 call minutes / month
                     </li>
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-emerald-400" /> 10 concurrent voice lines
+                      <Check className="w-3.5 h-3.5 text-orange-400" /> 10 concurrent voice lines
                     </li>
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-emerald-400" /> Sentiment analysis & analytics
+                      <Check className="w-3.5 h-3.5 text-orange-400" /> Sentiment analysis & analytics
                     </li>
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-emerald-400" /> Custom voice prompts & scripts
+                      <Check className="w-3.5 h-3.5 text-orange-400" /> Custom voice prompts & scripts
                     </li>
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-emerald-400" /> SMS confirmations via Twilio
+                      <Check className="w-3.5 h-3.5 text-orange-400" /> SMS confirmations via Twilio
                     </li>
                   </ul>
                 </div>

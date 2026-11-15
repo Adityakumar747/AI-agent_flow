@@ -23,7 +23,7 @@ export default function DashboardPage() {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
         <div className="glass-control inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono text-[var(--text-muted)]">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />
           <span>Synchronizing voice operations...</span>
         </div>
       </div>
@@ -35,7 +35,7 @@ export default function DashboardPage() {
       {/* Space-Style Section Header */}
       <div className="space-y-1">
         <div className="glass-control inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono text-[var(--text-muted)] mb-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />
           <span>Telephony Ops · Live Node #01</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--text)]">

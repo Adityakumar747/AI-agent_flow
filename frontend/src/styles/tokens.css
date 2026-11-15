@@ -1,6 +1,6 @@
 /* ==========================================================================
    DESIGN TOKENS — AI Voice Calling Agent (VoiceForge)
-   Quiet, technical, trustworthy emerald live signal system
+   Quiet, technical, trustworthy orange live signal system
    ========================================================================== */
 
 :root,
@@ -23,12 +23,12 @@
   --text-muted:    #A1A1AA;   /* secondary body */
   --text-subtle:   #7C7C85;   /* captions / metadata (≥4.5:1 on --bg) */
 
-  /* accent — "live signal" emerald */
-  --accent:        #34D399;
-  --accent-hover:  #6EE7B7;
-  --accent-ink:    #04130C;   /* text on accent */
-  --accent-soft:   rgba(52, 211, 153, 0.12);
-  --accent-ring:   rgba(52, 211, 153, 0.35);
+  /* accent — "live signal" KTM bright racing orange */
+  --accent:        #FF5500;
+  --accent-hover:  #FF6600;
+  --accent-ink:    #FFFFFF;   /* text on accent */
+  --accent-soft:   rgba(255, 85, 0, 0.14);
+  --accent-ring:   rgba(255, 85, 0, 0.45);
 
   /* semantic */
   --danger:        #F87171;
@@ -40,7 +40,7 @@
 
   /* decorative */
   --grid-line:     rgba(255, 255, 255, 0.04);
-  --glow:          radial-gradient(60% 50% at 50% 0%, rgba(52, 211, 153, 0.10), transparent 70%);
+  --glow:          radial-gradient(60% 50% at 50% 0%, rgba(255, 85, 0, 0.15), transparent 70%);
 
   /* radii */
   --r-sm:          6px;
@@ -81,12 +81,12 @@
   --text-muted:    #4A4A51;
   --text-subtle:   #6B6B73;
 
-  /* accent — emerald (AA compliant on light surface) */
-  --accent:        #047857;
-  --accent-hover:  #065F46;
+  /* accent — KTM orange (AA compliant on light surface) */
+  --accent:        #FF5500;
+  --accent-hover:  #E64A00;
   --accent-ink:    #FFFFFF;
-  --accent-soft:   rgba(4, 120, 87, 0.10);
-  --accent-ring:   rgba(4, 120, 87, 0.30);
+  --accent-soft:   rgba(255, 85, 0, 0.12);
+  --accent-ring:   rgba(255, 85, 0, 0.35);
 
   /* semantic */
   --danger:        #B91C1C;

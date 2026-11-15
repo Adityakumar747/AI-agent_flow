@@ -60,7 +60,7 @@ export default function RegisterPage() {
             <Phone className="w-2.5 h-2.5 text-white" />
           </div>
           <span>VoiceForge</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />
         </Link>
         <Link
           href="/login"

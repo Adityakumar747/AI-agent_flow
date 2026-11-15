@@ -20,7 +20,7 @@ export default function CallsPage() {
       {/* Header */}
       <div className="space-y-1">
         <div className="glass-control inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono text-[var(--text-muted)] mb-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />
           <span>Telephony Carrier Stream</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--text)]">

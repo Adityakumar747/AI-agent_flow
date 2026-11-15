@@ -45,7 +45,7 @@ export function ConversionMetrics({ data }: any) {
                 {m.title}
               </span>
               <div className="w-7 h-7 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center text-white">
-                <Icon className="w-3.5 h-3.5 text-emerald-400" />
+                <Icon className="w-3.5 h-3.5 text-orange-400" />
               </div>
             </div>
 

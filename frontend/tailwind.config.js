@@ -17,6 +17,24 @@ module.exports = {
     },
     extend: {
       colors: {
+        orange: {
+          50: '#FFF7ED',
+          100: '#FFEDD5',
+          200: '#FED7AA',
+          300: '#FDBA74',
+          400: '#FF6600',  // KTM bright electric racing orange
+          500: '#FF5500',  // KTM signature racing orange
+          600: '#E64A00',
+          700: '#C23D00',
+          800: '#9A3412',
+          900: '#7C2D12',
+        },
+        ktm: {
+          DEFAULT: '#FF5500',
+          bright: '#FF6600',
+          soft: 'rgba(255, 85, 0, 0.15)',
+          glow: 'rgba(255, 85, 0, 0.45)',
+        },
         bg: 'var(--bg)',
         surface: {
           1: 'var(--surface-1)',

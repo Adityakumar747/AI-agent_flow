@@ -80,7 +80,7 @@ export default function CustomersPage() {
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="glass-control inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono text-[var(--text-muted)] mb-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />
             <span>Customer Directory</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--text)]">
@@ -93,7 +93,7 @@ export default function CustomersPage() {
 
         <div className="flex flex-wrap items-center gap-2 self-start lg:self-auto">
           {selectedIds.length > 0 && (
-            <span className="text-xs font-mono text-emerald-400 mr-2">
+            <span className="text-xs font-mono text-orange-400 mr-2">
               ● {selectedIds.length} SELECTED
             </span>
           )}
@@ -106,7 +106,7 @@ export default function CustomersPage() {
               }
               setIsCampaignDialogOpen(true);
             }}
-            className="inline-flex items-center gap-1.5 px-4 h-9 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-medium text-emerald-400 hover:bg-emerald-500/20 transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 h-9 rounded-full bg-orange-500/10 border border-orange-500/30 text-xs font-medium text-orange-400 hover:bg-orange-500/20 transition-colors"
           >
             <PhoneCall className="w-3.5 h-3.5" />
             Launch With Selected

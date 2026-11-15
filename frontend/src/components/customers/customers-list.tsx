@@ -41,7 +41,7 @@ export function CustomersList({
     return (
       <div className="glass rounded-[28px] p-12 text-center">
         <div className="glass-control inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono text-[var(--text-muted)]">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-live-pulse" />
           <span>Synchronizing customer directory...</span>
         </div>
       </div>
@@ -52,7 +52,7 @@ export function CustomersList({
     return (
       <div className="glass rounded-[28px] p-12 sm:p-16 text-center space-y-4">
         <div className="w-12 h-12 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center text-white mx-auto">
-          <Users className="w-5 h-5 text-emerald-400" />
+          <Users className="w-5 h-5 text-orange-400" />
         </div>
         <div className="space-y-1">
           <h3 className="text-base font-medium text-[var(--text)]">No customers found</h3>

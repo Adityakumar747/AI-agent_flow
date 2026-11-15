@@ -34,7 +34,7 @@ export default function DashboardPage() {
       <div>
         <h1 className={`text-3xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Dashboard</h1>
         <p style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>
-          Welcome back! Here's your voice calling overview.
+          Welcome back! Here&apos;s your voice calling overview.
         </p>
       </div>
 

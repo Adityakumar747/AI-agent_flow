@@ -109,3 +109,4 @@ Per **PRIME DIRECTIVE (§0)**, the following modules and code must never be brok
 - **Dashboard & Feature Views:** Restyle `/dashboard`, `/calls`, `/campaigns`, `/customers`, `/appointments`, `/analytics` using consistent design tokens (`--surface-1`, `--surface-2`, `--border`, `--accent: #34D399`), responsive tables, and proper loading/empty states.
 - **Settings (`/settings`):** Clean two-column agent configuration view with danger zone.
 - **About & Features (`/about`, `/features`):** Restyled cleanly using design tokens without broken links.
+

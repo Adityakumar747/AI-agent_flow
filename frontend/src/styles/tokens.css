@@ -1,0 +1,115 @@
+/* ==========================================================================
+   DESIGN TOKENS — AI Voice Calling Agent (VoiceForge)
+   Quiet, technical, trustworthy emerald live signal system
+   ========================================================================== */
+
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* surfaces */
+  --bg:            #0A0A0B;   /* canvas */
+  --surface-1:     #111113;   /* cards / panels */
+  --surface-2:     #17171A;   /* raised / inputs / table rows */
+  --surface-3:     #1E1E22;   /* hover / active */
+  --overlay:       rgba(0, 0, 0, 0.65);
+
+  /* borders */
+  --border:        #26262B;   /* hairline border */
+  --border-strong: #34343A;   /* interactive hover border */
+
+  /* text */
+  --text:          #F4F4F5;   /* high contrast primary */
+  --text-muted:    #A1A1AA;   /* secondary body */
+  --text-subtle:   #7C7C85;   /* captions / metadata (≥4.5:1 on --bg) */
+
+  /* accent — "live signal" emerald */
+  --accent:        #34D399;
+  --accent-hover:  #6EE7B7;
+  --accent-ink:    #04130C;   /* text on accent */
+  --accent-soft:   rgba(52, 211, 153, 0.12);
+  --accent-ring:   rgba(52, 211, 153, 0.35);
+
+  /* semantic */
+  --danger:        #F87171;
+  --warning:       #FBBF24;
+  --info:          #60A5FA;
+  --danger-soft:   rgba(248, 113, 113, 0.12);
+  --warning-soft:  rgba(251, 191, 36, 0.12);
+  --info-soft:     rgba(96, 165, 250, 0.12);
+
+  /* decorative */
+  --grid-line:     rgba(255, 255, 255, 0.04);
+  --glow:          radial-gradient(60% 50% at 50% 0%, rgba(52, 211, 153, 0.10), transparent 70%);
+
+  /* radii */
+  --r-sm:          6px;
+  --r-md:          10px;
+  --r-lg:          14px;
+  --r-xl:          20px;
+  --r-full:        9999px;
+
+  /* shadows */
+  --shadow-sm:     0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-lg:     0 24px 60px -20px rgba(0, 0, 0, 0.6);
+
+  /* motion */
+  --ease-out:      cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:      150ms;
+  --dur-base:      250ms;
+  --dur-slow:      600ms;
+  --dur-reveal:    800ms;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* surfaces */
+  --bg:            #FAFAF9;   /* warm off-white canvas */
+  --surface-1:     #FFFFFF;   /* cards / panels */
+  --surface-2:     #F4F4F2;   /* raised / inputs / table rows */
+  --surface-3:     #ECECE9;   /* hover / active */
+  --overlay:       rgba(10, 10, 11, 0.45);
+
+  /* borders */
+  --border:        #E4E4E0;
+  --border-strong: #D2D2CC;
+
+  /* text */
+  --text:          #0B0B0C;
+  --text-muted:    #4A4A51;
+  --text-subtle:   #6B6B73;
+
+  /* accent — emerald (AA compliant on light surface) */
+  --accent:        #047857;
+  --accent-hover:  #065F46;
+  --accent-ink:    #FFFFFF;
+  --accent-soft:   rgba(4, 120, 87, 0.10);
+  --accent-ring:   rgba(4, 120, 87, 0.30);
+
+  /* semantic */
+  --danger:        #B91C1C;
+  --warning:       #B45309;
+  --info:          #1D4ED8;
+  --danger-soft:   rgba(185, 28, 28, 0.08);
+  --warning-soft:  rgba(180, 83, 9, 0.10);
+  --info-soft:     rgba(29, 78, 216, 0.08);
+
+  /* decorative */
+  --grid-line:     rgba(0, 0, 0, 0.05);
+  --glow:          radial-gradient(60% 50% at 50% 0%, rgba(4, 120, 87, 0.08), transparent 70%);
+
+  /* shadows */
+  --shadow-sm:     0 1px 2px rgba(0, 0, 0, 0.08);
+  --shadow-lg:     0 24px 60px -20px rgba(0, 0, 0, 0.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+

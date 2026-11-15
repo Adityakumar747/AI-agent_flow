@@ -57,3 +57,4 @@
   - 5.9 `/_not-found`
 - [ ] **Phase 6 — Polish**: Motion & reduced-motion, typography, responsive pass (360px to 1440px), a11y, contrast verification.
 - [ ] **Phase 7 — Final Verification**: Complete checklist, zero regression, all forms and WebSockets verified.
+

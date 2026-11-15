@@ -167,7 +167,7 @@ export default function LoginPage() {
           </div>
 
           <div className="mt-4 text-center text-sm text-white/70">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <button
               onClick={() => router.push('/register')}
               className="text-[#4746ef] hover:underline"

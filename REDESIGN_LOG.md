@@ -59,3 +59,22 @@
   - `npm run lint`: **PASS** (0 errors, 0 warnings)
   - Dev server running at `http://localhost:3002`.
 - Status: **DONE** (Commit `547c647`) **[⛳ CHECKPOINT]**
+
+
+### Checkpoint: Complete Website Redesign aligned with Space (`spacefs.com`)
+- **Inspection**: Scraped and downloaded full production HTML and 107KB CSS from `spacefs.com`. Extracted `.glass`, `.glass-control`, `.glass-strong`, `.glass-panel`, `.button-ink`, `.site-nav-backdrop`.
+- **Scope**: Replaced old colors and styles across EVERY page:
+  - Homepage (`/`)
+  - Features (`/features`)
+  - About (`/about`)
+  - Login (`/login`)
+  - Register (`/register`)
+  - App Shell (`layout.tsx`, `sidebar.tsx`, `header.tsx`)
+  - Dashboard (`/dashboard`)
+  - Calls (`/calls`)
+  - Campaigns (`/campaigns`)
+  - Customers (`/customers`)
+  - Appointments (`/appointments`)
+  - Analytics (`/analytics`)
+- **Verification**: `npx tsc --noEmit` (0 errors), `npm run lint` (0 errors), `next build` (all 16 routes built statically, exit code 0).
+- **Git Commit**: `b3e14e1` on branch `redesign/v2`.

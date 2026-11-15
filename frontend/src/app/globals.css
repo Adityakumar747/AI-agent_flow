@@ -119,3 +119,93 @@
 .hero-glow {
   background: var(--glow);
 }
+
+/* ─── Space.fs Exact Glass & Ink System ─────────────────────────────────── */
+.glass {
+  backdrop-filter: blur(28px) saturate(1.6);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
+  background: linear-gradient(180deg, rgba(44, 47, 54, 0.6), rgba(24, 26, 30, 0.52));
+  border: 1px solid hsla(0, 0%, 100%, 0.08);
+  box-shadow: inset 0 1px 0 hsla(0, 0%, 100%, 0.06), 0 24px 60px -28px rgba(0, 0, 0, 0.7), 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] .glass {
+  background: linear-gradient(180deg, hsla(0, 0%, 100%, 0.76), hsla(0, 0%, 100%, 0.58));
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: inset 0 1px 0 hsla(0, 0%, 100%, 0.95), 0 24px 60px -28px rgba(15, 23, 42, 0.28), 0 2px 4px rgba(15, 23, 42, 0.04);
+}
+
+.glass-control {
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  background: hsla(0, 0%, 100%, 0.06);
+  border: 1px solid hsla(0, 0%, 100%, 0.12);
+  box-shadow: inset 0 1px 0 hsla(0, 0%, 100%, 0.07);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.glass-control:hover {
+  background: hsla(0, 0%, 100%, 0.11);
+  border-color: hsla(0, 0%, 100%, 0.18);
+}
+
+[data-theme="light"] .glass-control {
+  background: hsla(0, 0%, 100%, 0.66);
+  border: 1px solid rgba(15, 23, 42, 0.09);
+  box-shadow: inset 0 1px 0 hsla(0, 0%, 100%, 0.9), 0 1px 2px rgba(15, 23, 42, 0.05);
+}
+
+[data-theme="light"] .glass-control:hover {
+  background: hsla(0, 0%, 100%, 0.9);
+  border-color: rgba(15, 23, 42, 0.14);
+}
+
+.glass-strong {
+  backdrop-filter: blur(32px) saturate(1.7);
+  -webkit-backdrop-filter: blur(32px) saturate(1.7);
+  background: linear-gradient(180deg, rgba(56, 60, 68, 0.7), rgba(30, 32, 37, 0.62));
+  border: 1px solid hsla(0, 0%, 100%, 0.12);
+  box-shadow: inset 0 1px 0 hsla(0, 0%, 100%, 0.08), 0 32px 80px -32px rgba(0, 0, 0, 0.8), 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] .glass-strong {
+  background: linear-gradient(180deg, hsla(0, 0%, 100%, 0.9), hsla(0, 0%, 100%, 0.78));
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  box-shadow: inset 0 1px 0 #fff, 0 32px 80px -32px rgba(30, 45, 80, 0.4), 0 2px 6px rgba(15, 23, 42, 0.06);
+}
+
+.glass-panel {
+  border-radius: 20px;
+  box-shadow: inset 0 1px 0 hsla(0, 0%, 100%, 0.08), 0 12px 48px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  position: relative;
+}
+
+.button-ink {
+  background: #FFFFFF;
+  color: #0A0A0B;
+  box-shadow: inset 0 1px 0 hsla(0, 0%, 100%, 0.16), 0 8px 20px -10px rgba(15, 23, 42, 0.5);
+  transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.button-ink:hover {
+  opacity: 0.88;
+}
+
+.button-ink:active {
+  transform: scale(0.98);
+}
+
+[data-theme="light"] .button-ink {
+  background: #0B0B0C;
+  color: #FFFFFF;
+}
+
+.site-nav-backdrop {
+  backdrop-filter: blur(20px) saturate(1.08);
+  -webkit-backdrop-filter: blur(20px) saturate(1.08);
+  background: hsla(0, 0%, 100%, 0.001);
+  height: 7rem;
+  -webkit-mask-image: linear-gradient(180deg, #000 0, rgba(0, 0, 0, 0.92) 38%, transparent);
+  mask-image: linear-gradient(180deg, #000 0, rgba(0, 0, 0, 0.92) 38%, transparent);
+}

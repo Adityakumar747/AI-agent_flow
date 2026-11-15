@@ -133,7 +133,7 @@ export default function HomePage() {
         <section className="relative px-5 sm:px-8 lg:px-10 pb-20 sm:pb-28">
           <div className="mx-auto max-w-4xl text-center space-y-6">
             {/* Live Indicator Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-[var(--text-muted)] select-none">
+            <div className="glass-control inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono text-[var(--text-muted)] select-none">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
               <span className="text-[var(--text)] font-medium">Live Voice Engine</span>
               <span className="text-white/20">/</span>
@@ -156,7 +156,7 @@ export default function HomePage() {
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
               <button
                 onClick={() => router.push('/register')}
-                className="w-full sm:w-auto inline-flex h-12 items-center justify-center rounded-full px-7 text-sm font-medium bg-[var(--text)] text-[var(--bg)] hover:opacity-90 active:scale-[0.98] transition-all shadow-sm gap-2"
+                className="button-ink w-full sm:w-auto inline-flex h-12 items-center justify-center rounded-full px-7 text-sm font-medium gap-2"
               >
                 Start free campaign
                 <ArrowRight className="w-4 h-4" />
@@ -166,7 +166,7 @@ export default function HomePage() {
                   const el = document.getElementById('demo');
                   el?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="w-full sm:w-auto inline-flex h-12 items-center justify-center rounded-full px-6 text-sm font-medium border border-[var(--border)] text-[var(--text)] hover:bg-[var(--surface-2)] active:scale-[0.98] transition-all"
+                className="glass-control w-full sm:w-auto inline-flex h-12 items-center justify-center rounded-full px-6 text-sm font-medium text-[var(--text)]"
               >
                 See call demo
               </button>
@@ -194,7 +194,7 @@ export default function HomePage() {
             </div>
 
             {/* Space-Style Precision Console Window */}
-            <div className="rounded-[24px] border border-[var(--border)] bg-[var(--surface-1)] shadow-[0_24px_80px_-20px_rgba(0,0,0,0.7)] overflow-hidden">
+            <div className="glass rounded-[28px] overflow-hidden">
               {/* Window Chrome Header */}
               <div className="flex items-center justify-between px-5 py-3.5 border-b border-[var(--border)] bg-[var(--surface-2)]/50 backdrop-blur-md">
                 <div className="flex items-center gap-2">
@@ -316,7 +316,7 @@ export default function HomePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Step 1 */}
-              <div className="rounded-[24px] border border-[var(--border)] bg-[var(--surface-1)] p-7 space-y-4">
+              <div className="glass rounded-[28px] p-7 space-y-4">
                 <span className="font-mono text-xs text-[var(--text-subtle)]">STEP 01</span>
                 <h3 className="text-lg font-medium text-[var(--text)]">
                   Configure Agent Script & Goals
@@ -324,13 +324,13 @@ export default function HomePage() {
                 <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
                   Author your custom voice prompt, set your campaign target (Appointment, Qualification, Feedback), and select target contacts.
                 </p>
-                <div className="p-3 rounded-xl bg-[var(--surface-2)] font-mono text-[11px] text-[var(--text-subtle)] border border-[var(--border)]">
+                <div className="p-3 rounded-xl bg-white/[0.03] font-mono text-[11px] text-[var(--text-subtle)] border border-white/10">
                   campaign.setGoal(&quot;BOOK_APPOINTMENT&quot;)
                 </div>
               </div>
 
               {/* Step 2 */}
-              <div className="rounded-[24px] border border-[var(--border)] bg-[var(--surface-1)] p-7 space-y-4">
+              <div className="glass rounded-[28px] p-7 space-y-4">
                 <span className="font-mono text-xs text-[var(--text-subtle)]">STEP 02</span>
                 <h3 className="text-lg font-medium text-[var(--text)]">
                   Autonomous Outbound Calling
@@ -338,13 +338,13 @@ export default function HomePage() {
                 <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
                   VoiceForge connects over carrier lines via Twilio, handling streaming speech recognition, reasoning, and speech synthesis.
                 </p>
-                <div className="p-3 rounded-xl bg-[var(--surface-2)] font-mono text-[11px] text-emerald-400 border border-[var(--border)]">
+                <div className="p-3 rounded-xl bg-white/[0.03] font-mono text-[11px] text-emerald-400 border border-white/10">
                   ● DUPLEX_STREAM: ACTIVE (12 Concurrent Lines)
                 </div>
               </div>
 
               {/* Step 3 */}
-              <div className="rounded-[24px] border border-[var(--border)] bg-[var(--surface-1)] p-7 space-y-4">
+              <div className="glass rounded-[28px] p-7 space-y-4">
                 <span className="font-mono text-xs text-[var(--text-subtle)]">STEP 03</span>
                 <h3 className="text-lg font-medium text-[var(--text)]">
                   Calendar & CRM Sync
@@ -352,7 +352,7 @@ export default function HomePage() {
                 <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
                   Spoken agreements turn into confirmed calendar bookings with word-for-word transcripts, sentiment scores, and SMS confirmation.
                 </p>
-                <div className="p-3 rounded-xl bg-[var(--surface-2)] font-mono text-[11px] text-[var(--text-subtle)] border border-[var(--border)]">
+                <div className="p-3 rounded-xl bg-white/[0.03] font-mono text-[11px] text-[var(--text-subtle)] border border-white/10">
                   {`appointment.sync({ status: "CONFIRMED" })`}
                 </div>
               </div>
@@ -376,7 +376,7 @@ export default function HomePage() {
               {USE_CASES.map((uc) => (
                 <div
                   key={uc.title}
-                  className="rounded-[28px] border border-[var(--border)] bg-[var(--surface-1)] p-8 space-y-4 hover:border-white/20 transition-all"
+                  className="glass rounded-[28px] p-8 space-y-4 hover:border-white/20 transition-all duration-300"
                 >
                   <div className="flex items-center justify-between text-xs font-mono text-[var(--text-subtle)]">
                     <span>{uc.category}</span>
@@ -439,12 +439,14 @@ export default function HomePage() {
               </p>
 
               {/* Monthly / Annual Toggle */}
-              <div className="inline-flex items-center gap-2 p-1 rounded-full bg-[var(--surface-2)] border border-[var(--border)] text-xs font-mono">
+              <div className="glass inline-flex items-center gap-1 rounded-full p-1 text-xs">
                 <button
                   type="button"
                   onClick={() => setIsAnnualPricing(false)}
-                  className={`px-3 py-1 rounded-full transition-colors ${
-                    !isAnnualPricing ? 'bg-white text-black font-medium' : 'text-[var(--text-muted)]'
+                  className={`relative rounded-full px-5 py-2 text-xs font-medium transition-colors ${
+                    !isAnnualPricing
+                      ? 'bg-white text-black shadow-sm'
+                      : 'text-[var(--text-muted)] hover:text-white'
                   }`}
                 >
                   Monthly
@@ -452,8 +454,10 @@ export default function HomePage() {
                 <button
                   type="button"
                   onClick={() => setIsAnnualPricing(true)}
-                  className={`px-3 py-1 rounded-full transition-colors ${
-                    isAnnualPricing ? 'bg-white text-black font-medium' : 'text-[var(--text-muted)]'
+                  className={`relative rounded-full px-5 py-2 text-xs font-medium transition-colors ${
+                    isAnnualPricing
+                      ? 'bg-white text-black shadow-sm'
+                      : 'text-[var(--text-muted)] hover:text-white'
                   }`}
                 >
                   Annual (20% off)
@@ -463,7 +467,7 @@ export default function HomePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Individual / Starter */}
-              <div className="rounded-[24px] border border-[var(--border)] bg-[var(--surface-1)] p-7 space-y-6 flex flex-col justify-between">
+              <div className="glass rounded-[28px] p-7 sm:p-8 space-y-6 flex flex-col justify-between">
                 <div className="space-y-4">
                   <div>
                     <h3 className="text-lg font-medium text-[var(--text)]">Individual</h3>
@@ -492,15 +496,15 @@ export default function HomePage() {
                 </div>
                 <button
                   onClick={() => router.push('/register')}
-                  className="w-full py-2.5 rounded-full border border-[var(--border)] text-xs font-medium text-[var(--text)] hover:bg-[var(--surface-2)] transition-colors"
+                  className="glass-control w-full py-2.5 rounded-full text-xs font-medium text-[var(--text)] transition-colors"
                 >
                   Start free trial
                 </button>
               </div>
 
               {/* Teams / Growth */}
-              <div className="rounded-[24px] border border-white/30 bg-[var(--surface-1)] p-7 space-y-6 flex flex-col justify-between shadow-xl relative">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-white text-black font-mono text-[10px] font-semibold uppercase tracking-wider">
+              <div className="glass-strong rounded-[28px] p-7 sm:p-8 space-y-6 flex flex-col justify-between relative">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-white text-black font-mono text-[10px] font-semibold uppercase tracking-wider shadow-md">
                   Popular
                 </div>
                 <div className="space-y-4">
@@ -534,14 +538,14 @@ export default function HomePage() {
                 </div>
                 <button
                   onClick={() => router.push('/register')}
-                  className="w-full py-2.5 rounded-full bg-white text-black text-xs font-medium hover:bg-neutral-200 transition-colors shadow-sm"
+                  className="button-ink w-full py-2.5 rounded-full text-xs font-medium"
                 >
                   Get started
                 </button>
               </div>
 
               {/* Enterprise */}
-              <div className="rounded-[24px] border border-[var(--border)] bg-[var(--surface-1)] p-7 space-y-6 flex flex-col justify-between">
+              <div className="glass rounded-[28px] p-7 sm:p-8 space-y-6 flex flex-col justify-between">
                 <div className="space-y-4">
                   <div>
                     <h3 className="text-lg font-medium text-[var(--text)]">Enterprise</h3>
@@ -567,7 +571,7 @@ export default function HomePage() {
                 </div>
                 <button
                   onClick={() => router.push('/register')}
-                  className="w-full py-2.5 rounded-full border border-[var(--border)] text-xs font-medium text-[var(--text)] hover:bg-[var(--surface-2)] transition-colors"
+                  className="glass-control w-full py-2.5 rounded-full text-xs font-medium text-[var(--text)] transition-colors"
                 >
                   Contact team
                 </button>
@@ -632,14 +636,14 @@ export default function HomePage() {
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
               <button
                 onClick={() => router.push('/register')}
-                className="w-full sm:w-auto inline-flex h-12 items-center justify-center rounded-full px-8 text-sm font-medium bg-[var(--text)] text-[var(--bg)] hover:opacity-90 active:scale-[0.98] transition-all shadow-sm gap-2"
+                className="button-ink w-full sm:w-auto inline-flex h-12 items-center justify-center rounded-full px-8 text-sm font-medium gap-2"
               >
                 Create free account
                 <ArrowRight className="w-4 h-4" />
               </button>
               <button
                 onClick={() => router.push('/login')}
-                className="w-full sm:w-auto inline-flex h-12 items-center justify-center rounded-full px-7 text-sm font-medium border border-[var(--border)] text-[var(--text)] hover:bg-[var(--surface-2)] active:scale-[0.98] transition-all"
+                className="glass-control w-full sm:w-auto inline-flex h-12 items-center justify-center rounded-full px-7 text-sm font-medium text-[var(--text)]"
               >
                 Sign in to console
               </button>

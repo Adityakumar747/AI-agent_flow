@@ -20,28 +20,28 @@ export function MarketingNavbar() {
   ];
 
   return (
-    <header className="fixed top-4 inset-x-0 z-50 flex justify-center px-4 pointer-events-none select-none">
-      <div className="pointer-events-auto w-full max-w-5xl h-14 px-3 sm:px-5 flex items-center justify-between rounded-full bg-[var(--surface-1)]/80 border border-[var(--border)] backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-200">
-        {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2.5 pl-1 group">
-          <div className="w-8 h-8 rounded-full bg-[var(--surface-2)] border border-[var(--border)] flex items-center justify-center text-white group-hover:border-white/30 transition-colors">
-            <Phone className="w-3.5 h-3.5 text-white" />
+    <header className="fixed top-0 inset-x-0 z-50 pointer-events-none select-none">
+      <div aria-hidden="true" className="site-nav-backdrop pointer-events-none absolute inset-x-0 top-0" />
+      <div className="relative z-10 flex h-20 items-center justify-between px-5 sm:px-8 lg:px-10 max-w-[1280px] mx-auto">
+        {/* Brand Logo Pill */}
+        <Link
+          href="/"
+          className="pointer-events-auto glass-control inline-flex h-11 items-center gap-2.5 rounded-full px-4 text-sm font-medium text-[var(--text)] transition-transform duration-200 hover:scale-[1.02]"
+        >
+          <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center">
+            <Phone className="w-3 h-3 text-white" />
           </div>
-          <div className="flex items-center gap-1.5">
-            <span className="font-medium text-sm tracking-tight text-[var(--text)]">
-              VoiceForge
-            </span>
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
-          </div>
+          <span className="font-medium tracking-tight">VoiceForge</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-6">
+        {/* Desktop Navigation Links Pill (Space Center Floating Glass) */}
+        <nav className="pointer-events-auto hidden md:flex glass-control h-11 items-center gap-1 rounded-full px-3">
           {navLinks.map((link) => (
             <Link
               key={link.label}
               href={link.href}
-              className="text-xs font-normal text-[var(--text-muted)] hover:text-[var(--text)] transition-colors"
+              className="text-xs font-normal text-[var(--text-muted)] hover:text-[var(--text)] px-3 py-1.5 rounded-full transition-colors hover:bg-white/[0.05]"
             >
               {link.label}
             </Link>
@@ -49,32 +49,29 @@ export function MarketingNavbar() {
         </nav>
 
         {/* Right CTA / Theme Toggle */}
-        <div className="hidden md:flex items-center gap-2">
+        <div className="pointer-events-auto flex items-center gap-2">
           <ThemeToggle />
-          <button
-            onClick={() => router.push('/login')}
-            className="text-xs font-normal text-[var(--text-muted)] hover:text-[var(--text)] px-3 py-1.5 transition-colors"
+          <Link
+            href="/login"
+            className="hidden sm:inline-flex text-xs font-normal text-[var(--text-muted)] hover:text-[var(--text)] px-3 py-1.5 transition-colors"
           >
             Sign in
-          </button>
+          </Link>
           <button
             onClick={() => router.push('/register')}
-            className="inline-flex h-9 items-center rounded-full px-4 text-xs font-medium bg-[var(--text)] text-[var(--bg)] hover:opacity-90 active:scale-95 transition-all shadow-sm"
+            className="button-ink inline-flex h-10 items-center rounded-full px-5 text-xs font-medium"
           >
             Get started
           </button>
-        </div>
 
-        {/* Mobile Hamburger Button */}
-        <div className="flex items-center gap-1.5 md:hidden">
-          <ThemeToggle />
+          {/* Mobile Hamburger Button */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle navigation menu"
-            className="p-1.5 rounded-full text-[var(--text-muted)] hover:text-[var(--text)]"
+            className="glass-control p-2 rounded-full text-[var(--text-muted)] hover:text-[var(--text)] md:hidden inline-flex items-center justify-center"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
         </div>
       </div>

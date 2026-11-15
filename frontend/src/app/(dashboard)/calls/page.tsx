@@ -1,17 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import * as React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { callsService } from '@/services/calls.service';
 import { CallsList } from '@/components/calls/calls-list';
 import { CallFilters } from '@/components/calls/call-filters';
-import { useTheme } from '@/components/theme-provider';
 
 export default function CallsPage() {
-  const [page, setPage] = useState(1);
-  const [filters, setFilters] = useState({});
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
+  const [page, setPage] = React.useState(1);
+  const [filters, setFilters] = React.useState({});
 
   const { data, isLoading } = useQuery({
     queryKey: ['calls', page, filters],
@@ -19,11 +16,18 @@ export default function CallsPage() {
   });
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className={`text-3xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Calls</h1>
-        <p style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>
-          View and manage all calling activity
+    <div className="space-y-6 max-w-[1400px] mx-auto pb-12">
+      {/* Header */}
+      <div className="space-y-1">
+        <div className="glass-control inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono text-[var(--text-muted)] mb-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+          <span>Telephony Carrier Stream</span>
+        </div>
+        <h1 className="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--text)]">
+          Voice Call Records
+        </h1>
+        <p className="text-xs sm:text-sm text-[var(--text-muted)]">
+          Search and inspect real-time audio sessions, durations, and booking outcomes.
         </p>
       </div>
 
@@ -34,7 +38,7 @@ export default function CallsPage() {
         isLoading={isLoading}
         page={page}
         onPageChange={setPage}
-        totalPages={data?.meta.totalPages || 1}
+        totalPages={data?.meta?.totalPages || 1}
       />
     </div>
   );

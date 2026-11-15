@@ -1,76 +1,81 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+'use client';
+
+import * as React from 'react';
 import { PhoneCall, Users, Megaphone, Calendar, TrendingUp } from 'lucide-react';
 import { AnalyticsOverview } from '@/types';
-import { useTheme } from '@/components/theme-provider';
 
 interface DashboardStatsProps {
   data?: AnalyticsOverview;
 }
 
 export function DashboardStats({ data }: DashboardStatsProps) {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
-
   const stats = [
     {
       title: 'Total Calls',
-      value: data?.totalCalls || 0,
+      value: data?.totalCalls?.toLocaleString() || '0',
       icon: PhoneCall,
       description: `${data?.recentCalls || 0} in last 7 days`,
-      color: isDark ? 'text-blue-400' : 'text-blue-600',
-      bgColor: isDark ? 'bg-blue-900/30' : 'bg-blue-100',
+      indicator: '● Carrier line',
     },
     {
       title: 'Active Campaigns',
-      value: data?.activeCampaigns || 0,
+      value: data?.activeCampaigns?.toLocaleString() || '0',
       icon: Megaphone,
       description: `${data?.totalCampaigns || 0} total campaigns`,
-      color: isDark ? 'text-purple-400' : 'text-purple-600',
-      bgColor: isDark ? 'bg-purple-900/30' : 'bg-purple-100',
+      indicator: '● Running',
     },
     {
       title: 'Total Customers',
-      value: data?.totalCustomers || 0,
+      value: data?.totalCustomers?.toLocaleString() || '0',
       icon: Users,
-      description: 'Registered contacts',
-      color: isDark ? 'text-green-400' : 'text-green-600',
-      bgColor: isDark ? 'bg-green-900/30' : 'bg-green-100',
+      description: 'Indexed contacts',
+      indicator: '● Synced',
     },
     {
       title: 'Appointments',
-      value: data?.totalAppointments || 0,
+      value: data?.totalAppointments?.toLocaleString() || '0',
       icon: Calendar,
       description: `${data?.upcomingAppointments || 0} upcoming`,
-      color: isDark ? 'text-orange-400' : 'text-orange-600',
-      bgColor: isDark ? 'bg-orange-900/30' : 'bg-orange-100',
+      indicator: '● Confirmed',
     },
     {
       title: 'Conversion Rate',
       value: `${data?.conversionRate || 0}%`,
       icon: TrendingUp,
-      description: 'Calls to appointments',
-      color: isDark ? 'text-indigo-400' : 'text-indigo-600',
-      bgColor: isDark ? 'bg-indigo-900/30' : 'bg-indigo-100',
+      description: 'Spoken bookings',
+      indicator: '● AI Goal',
     },
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
       {stats.map((stat) => {
         const Icon = stat.icon;
         return (
-          <Card key={stat.title} className={isDark ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200'}>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className={`text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{stat.title}</CardTitle>
-              <div className={`p-2 rounded-lg ${stat.bgColor}`}>
-                <Icon className={`h-4 w-4 ${stat.color}`} />
+          <div
+            key={stat.title}
+            className="glass rounded-[24px] p-5 space-y-3 flex flex-col justify-between hover:border-white/20 transition-all duration-200"
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-mono text-[var(--text-subtle)] uppercase tracking-wider">
+                {stat.title}
+              </span>
+              <div className="w-7 h-7 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center text-white">
+                <Icon className="h-3.5 w-3.5 text-white" />
               </div>
-            </CardHeader>
-            <CardContent>
-              <div className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>{stat.value}</div>
-              <p className={`text-xs mt-1 ${isDark ? 'text-gray-400' : 'text-muted-foreground'}`}>{stat.description}</p>
-            </CardContent>
-          </Card>
+            </div>
+
+            <div>
+              <div className="text-2xl font-semibold font-mono tracking-tight text-[var(--text)]">
+                {stat.value}
+              </div>
+              <div className="text-xs text-[var(--text-muted)] mt-1">{stat.description}</div>
+            </div>
+
+            <div className="pt-2 border-t border-white/[0.06] text-[10px] font-mono text-emerald-400 font-medium">
+              {stat.indicator}
+            </div>
+          </div>
         );
       })}
     </div>

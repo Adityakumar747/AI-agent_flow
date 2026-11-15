@@ -1,18 +1,14 @@
 'use client';
 
+import * as React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { analyticsService } from '@/services/analytics.service';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ConversionMetrics } from '@/components/analytics/conversion-metrics';
 import { CampaignPerformance } from '@/components/analytics/campaign-performance';
 import { SentimentDistribution } from '@/components/analytics/sentiment-distribution';
 import { HourlyDistribution } from '@/components/analytics/hourly-distribution';
-import { useTheme } from '@/components/theme-provider';
 
 export default function AnalyticsPage() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
-
   const { data: conversionMetrics } = useQuery({
     queryKey: ['analytics', 'conversion'],
     queryFn: () => analyticsService.getConversionMetrics(),
@@ -34,11 +30,18 @@ export default function AnalyticsPage() {
   });
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className={`text-3xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Analytics</h1>
-        <p style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>
-          Detailed insights and performance metrics
+    <div className="space-y-6 max-w-[1400px] mx-auto pb-12">
+      {/* Header */}
+      <div className="space-y-1">
+        <div className="glass-control inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono text-[var(--text-muted)] mb-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+          <span>Real-time Telephony Analytics</span>
+        </div>
+        <h1 className="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--text)]">
+          Voice Intelligence & Conversion
+        </h1>
+        <p className="text-xs sm:text-sm text-[var(--text-muted)]">
+          Streaming telemetry on caller sentiment, peak pickup hours, and campaign conversion rates.
         </p>
       </div>
 

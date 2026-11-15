@@ -1,14 +1,12 @@
+'use client';
+
+import * as React from 'react';
 import { Customer } from '@/types';
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { formatDate, formatPhoneNumber } from '@/lib/utils';
-import { Mail, Phone, Trash2 } from 'lucide-react';
+import { formatPhoneNumber } from '@/lib/utils';
+import { Mail, Phone, Trash2, Users } from 'lucide-react';
 import { customersService } from '@/services/customers.service';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import { useTheme } from '@/components/theme-provider';
 
 interface CustomersListProps {
   customers: Customer[];
@@ -26,8 +24,6 @@ export function CustomersList({
   selectedIds, onToggleSelect, onToggleSelectAll 
 }: CustomersListProps) {
   const queryClient = useQueryClient();
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
 
   const handleDelete = async (id: string) => {
     if (confirm('Are you sure you want to delete this customer?')) {
@@ -42,117 +38,151 @@ export function CustomersList({
   };
 
   if (isLoading) {
-    return <div className="text-center py-8" style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>Loading customers...</div>;
+    return (
+      <div className="glass rounded-[28px] p-12 text-center">
+        <div className="glass-control inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono text-[var(--text-muted)]">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-live-pulse" />
+          <span>Synchronizing customer directory...</span>
+        </div>
+      </div>
+    );
   }
 
   if (customers.length === 0) {
     return (
-      <Card className={`p-8 text-center ${isDark ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200'}`}>
-        <p style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>No customers found</p>
-      </Card>
+      <div className="glass rounded-[28px] p-12 sm:p-16 text-center space-y-4">
+        <div className="w-12 h-12 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center text-white mx-auto">
+          <Users className="w-5 h-5 text-emerald-400" />
+        </div>
+        <div className="space-y-1">
+          <h3 className="text-base font-medium text-[var(--text)]">No customers found</h3>
+          <p className="text-xs text-[var(--text-muted)] max-w-sm mx-auto">
+            Import contacts via CSV / Excel or add individual customers to populate your calling directory.
+          </p>
+        </div>
+      </div>
     );
   }
 
   return (
-    <Card className={isDark ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200'}>
-      <Table>
-        <TableHeader>
-          <TableRow className={isDark ? 'border-white/10' : 'border-gray-200'}>
-            <TableHead className="w-[50px]">
-              <input 
-                type="checkbox" 
-                className="w-4 h-4 rounded"
-                checked={customers.length > 0 && selectedIds.length === customers.length}
-                onChange={onToggleSelectAll}
-              />
-            </TableHead>
-            <TableHead className={isDark ? 'text-gray-300' : 'text-gray-700'}>Name</TableHead>
-            <TableHead className={isDark ? 'text-gray-300' : 'text-gray-700'}>Contact</TableHead>
-            <TableHead className={isDark ? 'text-gray-300' : 'text-gray-700'}>Tags</TableHead>
-            <TableHead className={isDark ? 'text-gray-300' : 'text-gray-700'}>Created</TableHead>
-            <TableHead className="w-[100px]">Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {customers.map((customer) => (
-            <TableRow key={customer.id} className={isDark ? 'border-white/10' : 'border-gray-200'}>
-              <TableCell>
+    <div className="glass rounded-[28px] overflow-hidden">
+      <div className="overflow-x-auto">
+        <table className="w-full text-left">
+          <thead className="border-b border-white/[0.08] bg-white/[0.02]">
+            <tr>
+              <th className="w-12 px-6 py-3.5">
                 <input 
                   type="checkbox" 
-                  className="w-4 h-4 rounded"
-                  checked={selectedIds.includes(customer.id)}
-                  onChange={() => onToggleSelect(customer.id)}
+                  className="w-4 h-4 rounded border-white/20 bg-white/5 accent-white cursor-pointer"
+                  checked={customers.length > 0 && selectedIds.length === customers.length}
+                  onChange={onToggleSelectAll}
                 />
-              </TableCell>
-              <TableCell>
-                <div>
-                  <div className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>{customer.name}</div>
-                  {customer.notes && (
-                    <div className="text-sm" style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>{customer.notes}</div>
-                  )}
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-2 text-sm" style={{ color: isDark ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.8)' }}>
-                    <Phone className="h-3 w-3" />
-                    {formatPhoneNumber(customer.phone)}
+              </th>
+              {['Contact Name', 'Phone & Email', 'Campaign Tags', 'Indexed Date', 'Actions'].map((header) => (
+                <th
+                  key={header}
+                  className="px-6 py-3.5 text-[11px] font-mono font-medium text-[var(--text-subtle)] uppercase tracking-wider"
+                >
+                  {header}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-white/[0.04]">
+            {customers.map((customer) => (
+              <tr
+                key={customer.id}
+                className="hover:bg-white/[0.02] transition-colors group"
+              >
+                <td className="px-6 py-4">
+                  <input 
+                    type="checkbox" 
+                    className="w-4 h-4 rounded border-white/20 bg-white/5 accent-white cursor-pointer"
+                    checked={selectedIds.includes(customer.id)}
+                    onChange={() => onToggleSelect(customer.id)}
+                  />
+                </td>
+                <td className="px-6 py-4">
+                  <div className="font-medium text-sm text-[var(--text)]">
+                    {customer.name}
                   </div>
-                  {customer.email && (
-                    <div className="flex items-center gap-2 text-sm" style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>
-                      <Mail className="h-3 w-3" />
-                      {customer.email}
+                  {customer.notes && (
+                    <div className="text-[11px] text-[var(--text-subtle)] mt-0.5">
+                      {customer.notes}
                     </div>
                   )}
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="flex flex-wrap gap-1">
-                  {customer.tags?.map((tag) => (
-                    <Badge key={tag} variant="secondary">{tag}</Badge>
-                  ))}
-                </div>
-              </TableCell>
-              <TableCell style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>{formatDate(customer.createdAt)}</TableCell>
-              <TableCell>
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  className="text-red-500 hover:text-red-700 hover:bg-red-50"
-                  onClick={() => handleDelete(customer.id)}
-                  title="Delete Customer"
-                >
-                  <Trash2 className="h-4 w-4" />
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-
-      <div className={`flex items-center justify-between p-4 border-t ${isDark ? 'border-white/10' : 'border-gray-200'}`}>
-        <p className="text-sm" style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)' }}>
-          Page {page} of {totalPages}
-        </p>
-        <div className="flex gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => onPageChange(page - 1)}
-            disabled={page === 1}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => onPageChange(page + 1)}
-            disabled={page === totalPages}
-          >
-            Next
-          </Button>
-        </div>
+                </td>
+                <td className="px-6 py-4">
+                  <div className="space-y-1 font-mono text-xs">
+                    <div className="flex items-center gap-1.5 text-[var(--text)]">
+                      <Phone className="w-3 h-3 text-[var(--text-subtle)]" />
+                      {formatPhoneNumber(customer.phone)}
+                    </div>
+                    {customer.email && (
+                      <div className="flex items-center gap-1.5 text-[var(--text-muted)] text-[11px]">
+                        <Mail className="w-3 h-3 text-[var(--text-subtle)]" />
+                        {customer.email}
+                      </div>
+                    )}
+                  </div>
+                </td>
+                <td className="px-6 py-4">
+                  <div className="flex flex-wrap gap-1.5">
+                    {customer.tags && customer.tags.length > 0 ? (
+                      customer.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-white/[0.05] border border-white/10 text-[var(--text-muted)]"
+                        >
+                          {tag}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="text-[11px] font-mono text-[var(--text-subtle)]">—</span>
+                    )}
+                  </div>
+                </td>
+                <td className="px-6 py-4 font-mono text-xs text-[var(--text-muted)]">
+                  {customer.createdAt ? new Date(customer.createdAt).toLocaleDateString() : 'Recent'}
+                </td>
+                <td className="px-6 py-4">
+                  <button
+                    onClick={() => handleDelete(customer.id)}
+                    className="glass-control p-1.5 rounded-full text-[var(--text-subtle)] hover:text-red-400 hover:border-red-400/30 transition-colors"
+                    title="Delete Customer"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-    </Card>
+
+      {totalPages > 1 && (
+        <div className="px-6 py-4 border-t border-white/[0.08] flex items-center justify-between">
+          <span className="text-xs font-mono text-[var(--text-subtle)]">
+            Page {page} of {totalPages}
+          </span>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => onPageChange(Math.max(1, page - 1))}
+              disabled={page <= 1}
+              className="glass-control h-8 px-3 rounded-full text-xs font-medium disabled:opacity-30"
+            >
+              Previous
+            </button>
+            <button
+              onClick={() => onPageChange(Math.min(totalPages, page + 1))}
+              disabled={page >= totalPages}
+              className="glass-control h-8 px-3 rounded-full text-xs font-medium disabled:opacity-30"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
